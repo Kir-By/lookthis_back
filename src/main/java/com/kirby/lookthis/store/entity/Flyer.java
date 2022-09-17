@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -32,4 +34,6 @@ public class Flyer {
 
     private Integer status;
 
+		@OneToMany(mappedBy = "flyer")
+	private List<FlyerSpot> flyerSpot = new ArrayList<>();
 }
