@@ -33,4 +33,7 @@ public class Flyer {
     private LocalDateTime endValidDate;
 
     private Integer status;
+
+		@OneToMany(mappedBy = "flyer")
+	private List<FlyerSpot> flyerSpot = new ArrayList<>();
 }
