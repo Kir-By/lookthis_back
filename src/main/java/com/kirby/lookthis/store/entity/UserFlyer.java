@@ -8,27 +8,25 @@ import java.time.LocalDateTime;
 
 @Entity
 @Builder
-@Table(name = "user_store")
+@Table(name = "user_flyer")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
-public class UserStore {
+public class UserFlyer {
 
     @Id
-    @Column(name = "store_flyer_id")
+    @Column(name = "user_flyer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer storeFlyerId;
+    private Integer userFlyerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id")
-    private Store store;
-
-    private String spotId;
+    @JoinColumn(name = "flyer_spot_id")
+    private FlyerSpot flyerSpot;
 
     private LocalDateTime createDate;
     private LocalDateTime initDate;

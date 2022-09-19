@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.kirby.lookthis.store.entity.UserStore;
+import com.kirby.lookthis.store.entity.Store;
+import com.kirby.lookthis.store.entity.UserFlyer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,6 +42,6 @@ public class User {
 	private Integer point;
 	private String phone;
 
-	@OneToMany(mappedBy = "user")
-	public List<UserStore> userStores = new ArrayList<>();
+	@OneToOne(mappedBy = "user")
+	private Store store;
 }

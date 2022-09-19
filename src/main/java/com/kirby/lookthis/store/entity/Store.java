@@ -1,5 +1,6 @@
 package com.kirby.lookthis.store.entity;
 
+import com.kirby.lookthis.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,10 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storeId;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Column(name = "store_name")
     private String storeName;
 
@@ -37,7 +42,4 @@ public class Store {
 
     @Column(name = "auth_user")
     private String authUser;
-
-    @OneToMany(mappedBy = "store")
-    private List<UserStore> userStores = new ArrayList<>();
 }

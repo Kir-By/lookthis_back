@@ -1,13 +1,6 @@
 package com.kirby.lookthis.store.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.kirby.lookthis.spot.entity.Spot;
 
@@ -15,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "flyer_spot")
@@ -29,12 +25,14 @@ public class FlyerSpot {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer flyerSpotId;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "flyer_id")
 	private Flyer flyer; 
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "spot_id")
 	private Spot spot; 
-	
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "flyerSpot")
+	private List<UserFlyer> userFlyer = new ArrayList<>();
 }

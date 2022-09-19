@@ -34,6 +34,9 @@ public class Flyer {
 
     private Integer status;
 
-		@OneToMany(mappedBy = "flyer")
+    @OneToMany(mappedBy = "flyer")
 	private List<FlyerSpot> flyerSpot = new ArrayList<>();
+
+    @OneToMany(mappedBy = "flyer")
+    private List<UserFlyer> userFlyers = new ArrayList<>();
 }

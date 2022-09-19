@@ -4,6 +4,7 @@ import com.kirby.lookthis.store.entity.Flyer;
 import com.kirby.lookthis.store.entity.Store;
 import com.kirby.lookthis.store.repository.FlyerRepository;
 import com.kirby.lookthis.store.repository.StoreRepository;
+import com.kirby.lookthis.user.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,10 @@ public class StoreRepositoryTests {
 
     @Test
     public void insertStoreTest() {
+        User user = User.builder().userId("nsw2").build();
         Store store = Store.builder()
                 .storeId(1)
+                .user(user)
                 .address("종로3가")
                 .authStatus(true)
                 .authUser("관리자")
