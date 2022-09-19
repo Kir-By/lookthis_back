@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -31,5 +33,4 @@ public class Flyer {
     private LocalDateTime endValidDate;
 
     private Integer status;
-
 }

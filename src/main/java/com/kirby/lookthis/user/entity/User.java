@@ -1,12 +1,12 @@
 package com.kirby.lookthis.user.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.kirby.lookthis.store.entity.UserStore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +23,7 @@ import lombok.ToString;
 public class User {
 
 	@Id
+	@Column(name = "user_id")
 	private String userId;
 
 	@Column(nullable = false)
@@ -39,4 +40,7 @@ public class User {
 	private Date updateDate;
 	private Integer point;
 	private String phone;
+
+	@OneToMany(mappedBy = "user")
+	public List<UserStore> userStores = new ArrayList<>();
 }
