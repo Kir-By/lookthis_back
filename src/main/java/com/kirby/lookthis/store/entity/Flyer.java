@@ -37,6 +37,8 @@ public class Flyer {
     @OneToMany(mappedBy = "flyer")
 	private List<FlyerSpot> flyerSpot = new ArrayList<>();
 
-    @OneToMany(mappedBy = "flyer")
-    private List<UserFlyer> userFlyers = new ArrayList<>();
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
 }

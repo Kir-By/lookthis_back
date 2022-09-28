@@ -1,6 +1,7 @@
 package com.kirby.lookthis.user.entity;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +37,17 @@ public class User {
 	private String plateformtype;
 	private String accesstoken;
 	private String name;
-	private Date birth;
-	private Date createDate;
-	private Date updateDate;
+	private LocalDateTime birth;
+	private LocalDateTime createDate;
+	private LocalDateTime updateDate;
 	private Integer point;
 	private String phone;
 
 	@OneToOne(mappedBy = "user")
 	private Store store;
+
+	@PrePersist
+	public void createDate() {
+		this.createDate = LocalDateTime.now();
+	}
 }

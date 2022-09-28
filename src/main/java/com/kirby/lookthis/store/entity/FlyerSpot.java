@@ -4,15 +4,13 @@ import javax.persistence.*;
 
 import com.kirby.lookthis.spot.entity.Spot;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Builder
 @Table(name = "flyer_spot")
 @NoArgsConstructor
 @AllArgsConstructor

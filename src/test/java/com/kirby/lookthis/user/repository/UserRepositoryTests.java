@@ -25,5 +25,15 @@ public class UserRepositoryTests {
 
 		userRepository.save(user);
 	}
+
+	@Test
+	public void getUserTest() {
+		User user = User.builder()
+				.userId("nsw2")
+				.build();
+
+		User user2 = userRepository.findByUserId(user.getUserId());
+		log.info(user2.toString());
+	}
 	
 }
