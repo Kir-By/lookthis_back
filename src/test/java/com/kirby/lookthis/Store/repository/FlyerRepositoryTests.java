@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 @Log4j2
@@ -33,6 +34,8 @@ public class FlyerRepositoryTests {
 
     @Test
     public void getFlyerListTest() {
-        flyerRepository.getFlyerList(1);
+       List<Flyer> flyerList = flyerRepository.getFlyerList(1);
+        flyerList.stream().forEach(flyer -> log.info(flyer));
+
     }
 }

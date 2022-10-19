@@ -20,13 +20,13 @@ public class UserController {
 
 	private final UserService userService;
 
-	@GetMapping(value = "/getUser", produces = "application/json")
-	public User getUser(UserDto userDto) {
+	@PostMapping(value = "/getUser", produces = "application/json")
+	public User getUser(@RequestBody UserDto userDto) {
 		log.info(userDto.toString());
 		return userService.getUser(userDto);
 	}
 
-	@PostMapping(value="/insertUser", produces = "application/json")
+	@PutMapping(value="/insertUser", produces = "application/json")
 	public void insertUser(@RequestBody UserDto userDto) {
 		log.info(userDto.toString());
 		userService.insertUser(userDto);

@@ -42,6 +42,7 @@ public class User {
 	private LocalDateTime updateDate;
 	private Integer point;
 	private String phone;
+	private Integer removed;
 
 	@OneToOne(mappedBy = "user")
 	private Store store;
