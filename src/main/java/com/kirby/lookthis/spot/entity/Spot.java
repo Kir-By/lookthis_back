@@ -45,7 +45,5 @@ public class Spot {
 	@Column(name = "lng")
 	private Double lng;
 
-	@OneToMany(mappedBy = "spot")
-	private List<FlyerSpot> flyerSpot = new ArrayList<>();
 	
 }

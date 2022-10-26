@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -34,7 +35,10 @@ public class FlyerRepositoryTests {
 
     @Test
     public void getFlyerListTest() {
-       List<Flyer> flyerList = flyerRepository.getFlyerList(1);
+        List<Integer> spotIdList = new ArrayList<>();
+        spotIdList.add(1);
+        spotIdList.add(2);
+        List<Flyer> flyerList = flyerRepository.findBySpots(spotIdList);
         flyerList.stream().forEach(flyer -> log.info(flyer));
 
     }

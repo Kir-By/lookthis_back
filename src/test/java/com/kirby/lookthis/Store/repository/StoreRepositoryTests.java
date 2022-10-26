@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 @Log4j2
@@ -34,5 +35,11 @@ public class StoreRepositoryTests {
                 .build();
 
         storeRepository.save(store);
+    }
+
+    @Test
+    public void getStoreTest() {
+        List<Store> storeList = storeRepository.findAll();
+        storeList.stream().forEach(store -> log.info(store.toString()));
     }
 }

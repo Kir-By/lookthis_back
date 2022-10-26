@@ -44,9 +44,6 @@ public class User {
 	private String phone;
 	private Integer removed;
 
-	@OneToOne(mappedBy = "user")
-	private Store store;
-
 	@PrePersist
 	public void createDate() {
 		this.createDate = LocalDateTime.now();

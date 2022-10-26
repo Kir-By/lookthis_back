@@ -31,6 +31,4 @@ public class FlyerSpot {
 	@JoinColumn(name = "spot_id")
 	private Spot spot; 
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "flyerSpot")
-	private List<UserFlyer> userFlyer = new ArrayList<>();
 }
