@@ -1,6 +1,5 @@
 package com.kirby.lookthis.spot.repository;
 
-import com.kirby.lookthis.spot.dto.SpotDto;
 import org.hibernate.sql.Select;
 import org.springframework.data.jpa.repository.JpaRepository;
 
