@@ -4,6 +4,7 @@ import lombok.*;
 
 @Data
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -12,5 +13,4 @@ public class FlyerSpotDto {
     private Integer flyerId;
     private Integer spotId;
     private Integer storeId;
-
 }

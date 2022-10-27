@@ -1,5 +1,8 @@
 package com.kirby.lookthis.Spot.repository;
 
+import com.kirby.lookthis.spot.dto.SpotDto;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +11,9 @@ import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.spot.repository.SpotRepository;
 
 import lombok.extern.log4j.Log4j2;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @SpringBootTest
 @Log4j2
@@ -26,6 +32,14 @@ public class SpotRepositoryTests {
 		.build();
 
 		spotRepository.save(spot);
+	}
+
+	@Test
+	@Transactional
+	public void getSpotListTest() {
+		log.info("=============================================");
+		List<Spot> spotList= spotRepository.getSpotListBySpotDto(37.504548, 127.024501);
+		spotList.stream().forEach(spot -> log.info(spot.toString()));
 	}
 	
 }
