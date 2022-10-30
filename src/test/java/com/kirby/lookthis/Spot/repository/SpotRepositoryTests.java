@@ -38,7 +38,11 @@ public class SpotRepositoryTests {
 	@Transactional
 	public void getSpotListTest() {
 		log.info("=============================================");
-		List<Spot> spotList= spotRepository.getSpotListBySpotDto(37.504548, 127.024501);
+		SpotDto spotDto = SpotDto.builder()
+				.lat(37.504548)
+				.lng(127.024501)
+				.build();
+		List<Spot> spotList= spotRepository.getSpotListBySpotDto(spotDto);
 		spotList.stream().forEach(spot -> log.info(spot.toString()));
 	}
 	

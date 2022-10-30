@@ -1,5 +1,6 @@
 package com.kirby.lookthis.store.service;
 
+import com.kirby.lookthis.spot.dto.SpotDto;
 import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
@@ -8,6 +9,8 @@ import com.kirby.lookthis.store.entity.Flyer;
 import com.kirby.lookthis.store.entity.FlyerSpot;
 import com.kirby.lookthis.store.entity.Store;
 import com.kirby.lookthis.user.entity.User;
+
+import java.util.List;
 
 public interface StoreService {
     void insertStore(StoreDto storeDto);

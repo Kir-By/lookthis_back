@@ -1,5 +1,8 @@
 package com.kirby.lookthis.store.service;
 
+import com.kirby.lookthis.spot.dto.SpotDto;
+import com.kirby.lookthis.spot.entity.Spot;
+import com.kirby.lookthis.spot.repository.SpotRepository;
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
 import com.kirby.lookthis.store.dto.StoreDto;
@@ -13,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -21,6 +26,7 @@ public class StoreServiceImpl implements StoreService{
     private final StoreRepository storeRepository;
     private final FlyerRepository flyerRepository;
     private final FlyerSpotRepository flyerSpotRepository;
+    private final SpotRepository spotRepository;
 
     @Override
     public void insertStore(StoreDto storeDto) {
@@ -39,4 +45,5 @@ public class StoreServiceImpl implements StoreService{
         FlyerSpot flyerSpot = flyerSpotDtoToEntity(flyerSpotDto);
         flyerSpotRepository.save(flyerSpot);
     }
+
 }

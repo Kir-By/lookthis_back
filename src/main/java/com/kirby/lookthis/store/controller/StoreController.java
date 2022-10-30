@@ -1,5 +1,6 @@
 package com.kirby.lookthis.store.controller;
 
+import com.kirby.lookthis.spot.dto.SpotDto;
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
 import com.kirby.lookthis.store.dto.StoreDto;
@@ -36,16 +37,5 @@ public class StoreController {
         storeService.insertFlyerSpot(flyerSpotDto);
     }
 
-    @PostMapping(value = "/getFlyerList")
-    public List<Flyer> getFlyerList(FlyerSpotDto flyerSpotDto) {
-
-        return null;
-    }
-
-    @PostMapping(value = "/getFlyerHistoryList")
-    public List<Flyer> getFlyerHistoryList(FlyerSpotDto flyerSpotDto) {
-
-        return null;
-    }
 
 }
