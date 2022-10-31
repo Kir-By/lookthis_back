@@ -9,4 +9,5 @@ import java.util.List;
 public interface SpotService {
 
     List<Flyer> getFlyerList(SpotDto spotDto);
+    List<Flyer> getFlyerHistoryList(SpotDto spotDto);
 }

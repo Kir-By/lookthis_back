@@ -34,13 +34,8 @@ public class FlyerRepositoryTests {
 
     @Test
     public void getFlyerListTest() {
-        Spot spot = Spot.builder()
-                .spotId(3)
-                .build();
-        SpotDto spotDto2 = new SpotDto();
-
-        List<Spot> spoList = new ArrayList<>();
-        spoList.add(spot);
+        List<Integer> spoList = new ArrayList<>();
+        spoList.add(3);
         List<Flyer> flyerList = flyerRepository.findFlyerBySpots(spoList);
         flyerList.stream().forEach(flyer -> log.info(flyer));
 

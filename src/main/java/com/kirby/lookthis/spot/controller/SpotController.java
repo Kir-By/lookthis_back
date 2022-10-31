@@ -25,9 +25,9 @@ public class SpotController {
     }
 
     @PostMapping(value = "/getFlyerHistoryList")
-    public List<Flyer> getFlyerHistoryList(FlyerSpotDto flyerSpotDto) {
+    public List<Flyer> getFlyerHistoryList(@RequestBody SpotDto spotDto) {
 
-        return null;
+        return spotService.getFlyerHistoryList(spotDto);
     }
 
 }

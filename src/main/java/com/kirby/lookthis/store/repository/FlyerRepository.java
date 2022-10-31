@@ -15,14 +15,14 @@ public interface FlyerRepository extends JpaRepository<Flyer, Integer> {
     @Query("select f from Flyer f " +
             "left join FlyerSpot fs on f.flyerId = fs.flyer.flyerId " +
             "left join UserFlyer us on fs.flyerSpotId = us.flyerSpot.flyerSpotId " +
-            "where fs.spot.spotId IN (:#{#spots.spotId}) " +
+            "where fs.spot.spotId IN (:#{#spots}) " +
             "AND us.user.userId is null ")
-    List<Flyer> findFlyerBySpots(@Param("spots") List<Spot> spots);
+    List<Flyer> findFlyerBySpots(@Param("spots") List<Integer> spots);
 
     @Query("select f from Flyer f " +
             "left join FlyerSpot fs on f.flyerId = fs.flyer.flyerId " +
             "left join UserFlyer us on fs.flyerSpotId = us.flyerSpot.flyerSpotId " +
-            "where fs.spot.spotId IN (:#{#spots.stream().spotId}) " +
-            "AND us.user.userId is null ")
-    List<Flyer> findFlyerHistoryBySpots(@Param("spots") List<Spot> spots);
+            "where fs.spot.spotId IN (:#{#spots}) " +
+            "AND us.user.userId is not null ")
+    List<Flyer> findFlyerHistoryBySpots(@Param("spots") List<Integer> spots);
 }

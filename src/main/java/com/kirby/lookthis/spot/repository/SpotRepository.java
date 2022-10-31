@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface SpotRepository extends JpaRepository<Spot, Integer> {
 
-    @Query("select s from Spot s " +
+    @Query("select s.spotId from Spot s " +
             "where ABS(s.lat - :#{#spotDto.lat}) < 0.0005 " +
             "and ABS(s.lng - :#{#spotDto.lng}) < 0.0005 ")
-    List<Spot> getSpotListBySpotDto(@Param("spotDto")SpotDto spotDto);
+    List<Integer> getSpotListBySpotDto(@Param("spotDto")SpotDto spotDto);
 }

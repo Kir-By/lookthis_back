@@ -21,8 +21,15 @@ public class SpotServiceImpl implements SpotService{
 
     @Override
     public List<Flyer> getFlyerList(SpotDto spotDto) {
-        List<Spot> spotList = spotRepository.getSpotListBySpotDto(spotDto);
+        List<Integer> spotList = spotRepository.getSpotListBySpotDto(spotDto);
 
         return flyerRepository.findFlyerBySpots(spotList);
+    }
+
+    @Override
+    public List<Flyer> getFlyerHistoryList(SpotDto spotDto) {
+        List<Integer> spotList = spotRepository.getSpotListBySpotDto(spotDto);
+
+        return flyerRepository.findFlyerHistoryBySpots(spotList);
     }
 }

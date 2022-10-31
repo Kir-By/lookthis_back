@@ -42,7 +42,7 @@ public class SpotRepositoryTests {
 				.lat(37.504548)
 				.lng(127.024501)
 				.build();
-		List<Spot> spotList= spotRepository.getSpotListBySpotDto(spotDto);
+		List<Integer> spotList= spotRepository.getSpotListBySpotDto(spotDto);
 		spotList.stream().forEach(spot -> log.info(spot.toString()));
 	}
 	
