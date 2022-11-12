@@ -1,0 +1,34 @@
+applications:
+  - name: lookthis_back
+    memory: 1024M
+    instances: 1
+    host: lookthis-back.nhncloud.paas-ta.com
+    path: build/libs/lookthis-back.jar
+    env:
+      VCAP_SERVICES: {
+        "mysql-on-demand": [
+          {
+            "binding_guid": "2dfc3cfe-d75b-430c-ba5a-a27113454251",
+            "binding_name": null,
+            "credentials": {
+              "hostname": "10.1.2.90",
+              "name": "oxoyvt9ppzr3ozzy4mvm",
+              "password": "2xd0tcwxpnt1ujy3",
+              "port": 13306,
+              "uri": "mysql://yzqkfru5f6j0ld6p:2xd0tcwxpnt1ujy3:10.1.2.90:13306/oxoyvt9ppzr3ozzy4mvm",
+              "username": "yzqkfru5f6j0ld6p"
+            },
+            "instance_guid": "a2eb7964-b6da-498d-9cb7-d513abedb769",
+            "instance_name": "lookthis_mysql",
+            "label": "mysql-on-demand",
+            "name": "lookthis_mysql",
+            "plan": "Small-20G",
+            "provider": null,
+            "syslog_drain_url": null,
+            "tags": [
+                "mysql"
+            ],
+            "volume_mounts": [ ]
+          }
+        ]
+      }
