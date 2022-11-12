@@ -2,9 +2,11 @@ applications:
   - name: lookthis_back
     memory: 1024M
     instances: 1
-    host: lookthis-back.nhncloud.paas-ta.com
-    path: build/libs/lookthis-back.jar
+    path: build/libs/lookthis-back.war
+    services:
+      mysql-service-instance
     env:
+      SPRING_PROFILES_ACTIVE: cloud
       VCAP_SERVICES: {
         "mysql-on-demand": [
           {
