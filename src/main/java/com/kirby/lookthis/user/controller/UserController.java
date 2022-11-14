@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
+@RequestMapping
 public class UserController {
 
 	private final UserService userService;
@@ -31,6 +32,4 @@ public class UserController {
 		log.info(userDto.toString());
 		userService.insertUser(userDto);
 	}
-	
-	
 }

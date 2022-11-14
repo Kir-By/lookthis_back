@@ -59,9 +59,9 @@ public class CloudDataConfig extends AbstractCloudConfig {
         try {
             String vcap_services = System.getenv("VCAP_SERVICES");
             JSONObject jsonObj = JSONObject.fromObject(vcap_services);
-            JSONArray userPro = jsonObj.getJSONArray("CubridDB");
-            jsonObj = JSONObject.fromObject(userPro.get(0));
-            jsonObj = jsonObj.getJSONObject("credentials");
+            JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
+            JSONObject service_object = JSONObject.fromObject(userPro.get(0));
+            JSONObject credObj = jsonObj.getJSONObject("credentials");
             cubridJdbcUrl = jsonObj.getString("jdbcurl");
 
             return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
