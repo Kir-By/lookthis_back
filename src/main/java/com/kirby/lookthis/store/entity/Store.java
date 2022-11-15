@@ -2,10 +2,9 @@ package com.kirby.lookthis.store.entity;
 
 import com.kirby.lookthis.user.entity.User;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Builder
@@ -14,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Getter
+@DynamicUpdate
 public class Store {
 
     @Id

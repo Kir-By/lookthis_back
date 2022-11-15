@@ -2,7 +2,6 @@ package com.kirby.lookthis.user.dto;
 
 import lombok.*;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,4 +21,5 @@ public class UserDto {
     private LocalDateTime updateDate;
     private Integer point;
     private String phone;
+    private String fcmToken;
 }

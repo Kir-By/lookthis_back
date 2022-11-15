@@ -1,13 +1,10 @@
 package com.kirby.lookthis.store.entity;
 
-import javax.persistence.*;
-
 import com.kirby.lookthis.spot.entity.Spot;
-
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Builder
@@ -16,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Getter
+@DynamicUpdate
 public class FlyerSpot {
 
 	@Id

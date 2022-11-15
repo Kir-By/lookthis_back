@@ -1,20 +1,12 @@
 package com.kirby.lookthis.user.entity;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
-import com.kirby.lookthis.store.entity.Store;
-import com.kirby.lookthis.store.entity.UserFlyer;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
+@DynamicUpdate
 @Entity
 @Builder
 @Table(name = "user")
@@ -43,6 +35,7 @@ public class User {
 	private Integer point;
 	private String phone;
 	private Integer removed;
+	private String fcmToken;
 
 	@PrePersist
 	public void createDate() {

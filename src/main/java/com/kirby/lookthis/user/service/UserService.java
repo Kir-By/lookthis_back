@@ -5,7 +5,7 @@ import com.kirby.lookthis.user.entity.User;
 
 public interface UserService {
 
-    void insertUser(UserDto userDto);
+    void saveUser(UserDto userDto);
     User getUser(UserDto userDto);
 
     default UserDto userEntityToDto(User user){
@@ -21,6 +21,7 @@ public interface UserService {
                 .plateformtype(user.getPlateformtype())
                 .point(user.getPoint())
                 .updateDate(user.getUpdateDate())
+                .fcmToken(user.getFcmToken())
                 .build();
         return dto;
     }
@@ -38,6 +39,7 @@ public interface UserService {
                 .point(userDto.getPoint())
                 .updateDate(userDto.getUpdateDate())
                 .userId(userDto.getUserId())
+                .fcmToken(userDto.getFcmToken())
                 .build();
 
         return user;

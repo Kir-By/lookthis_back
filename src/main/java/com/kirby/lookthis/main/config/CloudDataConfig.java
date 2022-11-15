@@ -60,7 +60,9 @@ public class CloudDataConfig extends AbstractCloudConfig {
             String vcap_services = System.getenv("VCAP_SERVICES");
             JSONObject jsonObj = JSONObject.fromObject(vcap_services);
             JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
-            JSONObject service_object = JSONObject.fromObject(userPro.get(0));
+            for (int i = 0; i < userPro.size(); i++) {
+                JSONObject service_object = JSONObject.fromObject(userPro.get(i));
+            }
             JSONObject credObj = jsonObj.getJSONObject("credentials");
             cubridJdbcUrl = jsonObj.getString("jdbcurl");
 

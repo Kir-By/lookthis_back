@@ -1,23 +1,9 @@
 package com.kirby.lookthis.spot.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.kirby.lookthis.store.entity.FlyerSpot;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import javax.persistence.*;
 
 @Entity
 @Builder
@@ -26,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Getter
+@DynamicUpdate
 public class Spot {
 
 	@Id

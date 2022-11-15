@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 
 @Entity
 @Builder
-@Table(name = "user_flyer")
+@Table
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @DynamicUpdate
-public class UserFlyer {
+public class UserFlyerHistory {
 
     @Id
     @Column(name = "user_flyer_id")

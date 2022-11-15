@@ -2,11 +2,10 @@ package com.kirby.lookthis.store.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Builder
@@ -15,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Getter
+@DynamicUpdate
 public class Flyer {
 
     @Id
