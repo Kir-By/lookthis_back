@@ -1,5 +1,6 @@
 package com.kirby.lookthis.main.config;
 
+import lombok.extern.log4j.Log4j2;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import javax.sql.DataSource;
 
 @Profile("cloud")
+@Log4j2
 @ServiceScan
 public class CloudDataConfig extends AbstractCloudConfig {
 
@@ -58,6 +60,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
     public DataSource cubridDataSource() {
         try {
             String vcap_services = System.getenv("VCAP_SERVICES");
+            log.info(vcap_services);
             JSONObject jsonObj = JSONObject.fromObject(vcap_services);
             JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
             for (int i = 0; i < userPro.size(); i++) {
