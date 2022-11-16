@@ -34,6 +34,8 @@ dependencies {
 	implementation group: 'com.github.jinahya', name: 'cubrid-jdbc-driver-10.1.1.7691', version: '10.1.1.7691-1.0.0'
 	// https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
 	implementation group: 'net.sf.json-lib', name: 'json-lib', version: '2.4', classifier:'jdk15'
+// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
+	implementation group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '8.5.83'
 
 	// https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
 	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.4'

@@ -22,12 +22,12 @@ public class StoreController {
 
     private final StoreService storeService;
 
-    @PostMapping(value = "/insertStore", produces = "application/json")
+    @PutMapping(value = "/saveStore", produces = "application/json")
     public void insertStore(@RequestBody StoreDto storeDto) {
         storeService.insertStore(storeDto);
     }
 
-    @PutMapping(value = "/insertFlyer", produces = "application/json")
+    @PutMapping(value = "/saveFlyer", produces = "application/json")
     public void insertFlyer(@RequestBody FlyerDto flyerDto) {
         storeService.insertFlyer(flyerDto);
     }

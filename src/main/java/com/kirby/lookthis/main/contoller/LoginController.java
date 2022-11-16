@@ -44,7 +44,8 @@ public class LoginController {
     }
 
     @GetMapping(value = "/api/naver/callback")
-    public void naverLogin(String code, String state) {
+    public String naverLogin(String code, String state) {
+        log.info("test");
         WebClient webClient = WebClient.builder()
                 .baseUrl("https://nid.naver.com")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -53,7 +54,7 @@ public class LoginController {
                 .uri(uriBuilder -> uriBuilder
                         .path("/oauth2.0/token")
                         .queryParam("client_id", clientId)
-                        .queryParam("client_secrete", clientSecret)
+                        .queryParam("client_secret", clientSecret)
                         .queryParam("grant_type", "authorization_code")
                         .queryParam("state", state)
                         .queryParam("code", code)
@@ -62,6 +63,7 @@ public class LoginController {
 
         String token = response.get("access_token").toString();
         getUserInfo(token);
+        return "redirect:https://lookthistest.nhncloud.paas-ta.com/flyer";
     }
 
     public void getUserInfo(String accessToken) {
