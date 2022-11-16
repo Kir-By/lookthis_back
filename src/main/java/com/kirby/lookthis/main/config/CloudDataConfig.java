@@ -60,6 +60,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
     public DataSource cubridDataSource() {
         try {
             String vcap_services = System.getenv("VCAP_SERVICES");
+            log.info("==================================");
             log.info(vcap_services);
             JSONObject jsonObj = JSONObject.fromObject(vcap_services);
             JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
