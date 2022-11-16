@@ -62,9 +62,9 @@ public class CloudDataConfig extends AbstractCloudConfig {
             JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
             for (int i = 0; i < userPro.size(); i++) {
                 JSONObject service_object = JSONObject.fromObject(userPro.get(i));
+                JSONObject credObj = service_object.getJSONObject("credentials");
+                cubridJdbcUrl = credObj.getString("jdbcurl");
             }
-            JSONObject credObj = jsonObj.getJSONObject("credentials");
-            cubridJdbcUrl = jsonObj.getString("jdbcurl");
 
             return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
         } catch (Exception e) {
