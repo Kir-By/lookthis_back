@@ -67,7 +67,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
             for (int i = 0; i < userPro.size(); i++) {
                 JSONObject service_object = JSONObject.fromObject(userPro.get(i));
                 JSONObject credObj = service_object.getJSONObject("credentials");
-                cubridJdbcUrl = credObj.getString("jdbcurl");
+                cubridJdbcUrl = credObj.getString("uri");
             }
 
             return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
