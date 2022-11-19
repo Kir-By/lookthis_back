@@ -38,6 +38,18 @@ public class CloudDataConfig extends AbstractCloudConfig {
         Cloud cloud = cloudFactory.getCloud();
         ServiceInfo serviceInfo = cloud.getServiceInfo(mysqlServiceName);
         String serviceId = serviceInfo.getId();
+
+        String vcap_services = System.getenv("VCAP_SERVICES");
+        log.info("==================================");
+        log.info(vcap_services);
+        JSONObject jsonObj = JSONObject.fromObject(vcap_services);
+        JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
+        for (int i = 0; i < userPro.size(); i++) {
+            JSONObject service_object = JSONObject.fromObject(userPro.get(i));
+            JSONObject credObj = service_object.getJSONObject("credentials");
+            cubridJdbcUrl = credObj.getString("uri");
+        }
+
         return cloud.getServiceConnector(serviceId, DataSource.class, null);
 
     }
@@ -59,7 +71,12 @@ public class CloudDataConfig extends AbstractCloudConfig {
             for (int i = 0; i < userPro.size(); i++) {
                 JSONObject service_object = JSONObject.fromObject(userPro.get(i));
                 JSONObject credObj = service_object.getJSONObject("credentials");
+                cubridJdbcUrl = credObj.getString("hostname");
+                cubridJdbcUrl = credObj.getString("port");
+                cubridJdbcUrl = credObj.getString("username");
+                cubridJdbcUrl = credObj.getString("password");
                 cubridJdbcUrl = credObj.getString("uri");
+                cubridJdbcUrl = credObj.getString("username");
             }
             /*String vcap_services = System.getenv("VCAP_SERVICES");
             JSONObject jsonObj = JSONObject.fromObject(vcap_services);
@@ -68,7 +85,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
             jsonObj = jsonObj.getJSONObject("credentials");
             cubridJdbcUrl = jsonObj.getString("jdbcurl");
 */
-            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), "yzqkfru5f6j0ld6p:2xd0tcwxpnt1ujy3:10.1.2.90:13306");
+            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), "cubridJdbcUrl");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
