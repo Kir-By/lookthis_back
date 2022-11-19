@@ -1,3 +1,4 @@
+/*
 package com.kirby.lookthis.main.security;
 
 import com.kirby.lookthis.user.entity.User;
@@ -23,3 +24,4 @@ public class CustomUserDetailService implements UserDetailsService {
         return user == null ? null : new CustomUser(user);
     }
 }
+*/
