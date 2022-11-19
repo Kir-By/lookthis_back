@@ -69,7 +69,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
                 cubridJdbcUrl = credObj.getString("uri");
             }
 
-            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), "jdbc:mysql://yzqkfru5f6j0ld6p:2xd0tcwxpnt1ujy3:10.1.2.90:13306/oxoyvt9ppzr3ozzy4mvm");
+            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
