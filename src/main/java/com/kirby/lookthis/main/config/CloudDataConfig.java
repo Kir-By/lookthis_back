@@ -12,6 +12,7 @@ import org.springframework.cloud.config.java.AbstractCloudConfig;
 import org.springframework.cloud.config.java.ServiceScan;
 import org.springframework.cloud.service.ServiceInfo;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +23,7 @@ import javax.sql.DataSource;
 @Profile("cloud")
 @Log4j2
 @ServiceScan
+@Configuration
 public class CloudDataConfig extends AbstractCloudConfig {
 
     @Value("${db.mysql.servicename}")
