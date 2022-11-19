@@ -31,15 +31,6 @@ public class CloudDataConfig extends AbstractCloudConfig {
 
     private String cubridJdbcUrl;
 
-    @Value("${mongodb.service.name}")
-    private String mongoServiceName;
-
-    @Value("${redis.service.name}")
-    private String redisServiceName;
-
-    @Value("${rabbitmq.service.name}")
-    private String rabbitServiceName;
-
     @Bean(name = "dsMysql")
     @Primary
     public DataSource mysqlDataSource() {
@@ -60,7 +51,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
     @Bean(name = "dsCubrid")
     public DataSource cubridDataSource() {
         try {
-            String vcap_services = System.getenv("VCAP_SERVICES");
+            /*String vcap_services = System.getenv("VCAP_SERVICES");
             log.info("==================================");
             log.info(vcap_services);
             JSONObject jsonObj = JSONObject.fromObject(vcap_services);
@@ -69,7 +60,13 @@ public class CloudDataConfig extends AbstractCloudConfig {
                 JSONObject service_object = JSONObject.fromObject(userPro.get(i));
                 JSONObject credObj = service_object.getJSONObject("credentials");
                 cubridJdbcUrl = credObj.getString("uri");
-            }
+            }*/
+            String vcap_services = System.getenv("VCAP_SERVICES");
+            JSONObject jsonObj = JSONObject.fromObject(vcap_services);
+            JSONArray userPro = jsonObj.getJSONArray("CubridDB");
+            jsonObj = JSONObject.fromObject(userPro.get(0));
+            jsonObj = jsonObj.getJSONObject("credentials");
+            cubridJdbcUrl = jsonObj.getString("jdbcurl");
 
             return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
         } catch (Exception e) {
