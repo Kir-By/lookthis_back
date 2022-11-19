@@ -68,7 +68,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
             jsonObj = jsonObj.getJSONObject("credentials");
             cubridJdbcUrl = jsonObj.getString("jdbcurl");
 */
-            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
+            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), "yzqkfru5f6j0ld6p:2xd0tcwxpnt1ujy3:10.1.2.90:13306");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
