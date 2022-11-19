@@ -5,7 +5,7 @@ applications:
     host: lookthis-back
     path: build/libs/lookthis-back.war
     services:
-      mysql-service-instance
+    - mysql-service-instance
     env:
       SPRING_PROFILES_ACTIVE: cloud
       VCAP_SERVICES: {
