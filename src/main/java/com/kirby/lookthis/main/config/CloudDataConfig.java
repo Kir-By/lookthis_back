@@ -26,7 +26,7 @@ import javax.sql.DataSource;
 @Configuration
 public class CloudDataConfig extends AbstractCloudConfig {
 
-    @Value("${db.mysql.servicemen}")
+    @Value("${db.mysql.servicename}")
     private String mysqlServiceName;
 
     private String cubridJdbcUrl;
