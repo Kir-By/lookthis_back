@@ -61,7 +61,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
         log.info(cubridJdbcUrl);
 
         DataSource dataSource = DataSourceBuilder.create()
-                .url("jdbc:mariadb://yzqkfru5f6j0ld6p:2xd0tcwxpnt1ujy3:10.1.2.90:13306/oxoyvt9ppzr3ozzy4mvm")
+                .url("jdbc:mariadb://10.1.2.90:13306/oxoyvt9ppzr3ozzy4mvm")
                 .username(username)
                 .password(password)
                 .build();
