@@ -88,12 +88,8 @@ public class CloudDataConfig extends AbstractCloudConfig {
             for (int i = 0; i < userPro.size(); i++) {
                 JSONObject service_object = JSONObject.fromObject(userPro.get(i));
                 JSONObject credObj = service_object.getJSONObject("credentials");
-                cubridJdbcUrl = credObj.getString("hostname");
-                cubridJdbcUrl = credObj.getString("port");
-                cubridJdbcUrl = credObj.getString("username");
-                cubridJdbcUrl = credObj.getString("password");
+
                 cubridJdbcUrl = credObj.getString("uri");
-                cubridJdbcUrl = credObj.getString("username");
             }
             /*String vcap_services = System.getenv("VCAP_SERVICES");
             JSONObject jsonObj = JSONObject.fromObject(vcap_services);
