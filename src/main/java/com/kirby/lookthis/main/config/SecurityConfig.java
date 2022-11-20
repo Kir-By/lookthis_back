@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /*private final CustomOAuth2UserService customOAuth2UserService;*/
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -25,8 +27,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/auth/**").anonymous()
-                .antMatchers("/**").permitAll();
-        http.csrf().disable();
+                .antMatchers("/**").permitAll()
+                .and()
+                .csrf().disable()
+                .headers().frameOptions().deny()
+                /*.and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService)*/
+        ;
     }
 
 }
