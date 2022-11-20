@@ -40,7 +40,7 @@ public class LoginController {
         url.append(NAVER_AUTH_URI + "?");
         url.append("client_id=" + clientId);
         url.append("&response_type=code");
-        url.append("&redirect_url=http://localhost:8080/auth/api/naver/callback");
+        url.append("&redirect_url=https://lookthis-back.nhncloud.paas-ta.com/auth/api/naver/callback");
         url.append("&state=" + state);
         return "redirect:" + url;
     }
