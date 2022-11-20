@@ -30,6 +30,7 @@ public class User {
 	private String accesstoken;
 	private String name;
 	private LocalDateTime birth;
+	@Column(insertable = true, updatable = false)
 	private LocalDateTime createDate;
 	private LocalDateTime updateDate;
 	private Integer point;
