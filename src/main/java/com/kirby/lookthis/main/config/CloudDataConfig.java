@@ -44,18 +44,23 @@ public class CloudDataConfig extends AbstractCloudConfig {
         log.info(vcap_services);
         JSONObject jsonObj = JSONObject.fromObject(vcap_services);
         JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
+        String username = null;
+        String password = null;
+
         for (int i = 0; i < userPro.size(); i++) {
             JSONObject service_object = JSONObject.fromObject(userPro.get(i));
             JSONObject credObj = service_object.getJSONObject("credentials");
-            cubridJdbcUrl = credObj.getString("username");
-            cubridJdbcUrl += ":" + credObj.getString("password");
+            username = credObj.getString("username");
+            cubridJdbcUrl = username;
+            password = credObj.getString("password");
+            cubridJdbcUrl += ":" + password;
             cubridJdbcUrl += ":" + credObj.getString("hostname");
             cubridJdbcUrl += ":" + credObj.getString("port");
         }
         log.info(cubridJdbcUrl);
 
         try {
-            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
+            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl, username, password);
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
