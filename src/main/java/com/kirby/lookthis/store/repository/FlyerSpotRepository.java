@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
 public interface FlyerSpotRepository extends JpaRepository<FlyerSpot, Integer> {
 
-    @Query(value = "select fs from FlyerSpot fs " +
+    @Query("select fs.flyerSpotId from FlyerSpot fs " +
             "where fs.flyer.flyerId = :#{#pointDto.flyerId} " +
-            "AND fs.spot.spotId = #{#pointDto.spotId}", nativeQuery = true)
-    List<FlyerSpot> getFlyerSpotId(@Param("pointDto")PointDto pointDto);
+            "and fs.spot.spotId = :#{#pointDto.spotId}")
+    Integer getFlyerSpotId(@Param("pointDto")PointDto pointDto);
 }

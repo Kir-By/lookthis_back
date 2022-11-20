@@ -35,5 +35,6 @@ public class UserRepositoryTests {
 		User user2 = userRepository.findByUserId(user.getUserId());
 		log.info(user2.toString());
 	}
+
 	
 }

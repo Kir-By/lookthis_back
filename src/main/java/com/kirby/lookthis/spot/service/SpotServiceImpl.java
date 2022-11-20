@@ -59,7 +59,7 @@ public class SpotServiceImpl implements SpotService{
         userDto.setPoint(user.getPoint() + pointDto.getPoint());
         userRepository.updatePoint(userDto);
 
-        Integer flyerSpotId = flyerSpotRepository.getFlyerSpotId(pointDto).get(0).getFlyerSpotId();
+        Integer flyerSpotId = flyerSpotRepository.getFlyerSpotId(pointDto);
 
         pointDto.setFlyerSpotId(flyerSpotId);
 

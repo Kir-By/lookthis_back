@@ -63,7 +63,7 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
-apply plugin: 'jacoco'
+/*apply plugin: 'jacoco'
 
 jacoco {
 	toolVersion = "0.7.9+"
@@ -73,7 +73,7 @@ test {
 	jacoco {
 		destinationFile = file("$buildDir/jacoco/jacoco-overall.exec")
 	}
-}
+}*/
 
 tasks.named('test') {
 	useJUnitPlatform()
