@@ -31,7 +31,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
 
     private String cubridJdbcUrl;
 
-    @Bean(name = "dsMysql")
+    /*@Bean(name = "dsMysql")
     @Primary
     public DataSource mysqlDataSource() {
         CloudFactory cloudFactory = new CloudFactory();
@@ -52,7 +52,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
 
         return cloud.getServiceConnector(serviceId, DataSource.class, null);
 
-    }
+    }*/
 
     @Bean(name = "jdbcMysql")
     @Autowired
@@ -60,7 +60,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
         return new JdbcTemplate(dsSlave);
     }
 
-    @Bean(name = "dsCubrid")
+    @Bean(name = "dsMysql")
     public DataSource cubridDataSource() {
         try {
             String vcap_services = System.getenv("VCAP_SERVICES");
@@ -91,9 +91,9 @@ public class CloudDataConfig extends AbstractCloudConfig {
         }
     }
 
-    @Bean(name = "jdbcCubrid")
+    /*@Bean(name = "jdbcCubrid")
     @Autowired
     public JdbcTemplate cubridJdbcTemplate(@Qualifier("dsCubrid") DataSource dsSlave) {
         return new JdbcTemplate(dsSlave);
-    }
+    }*/
 }
