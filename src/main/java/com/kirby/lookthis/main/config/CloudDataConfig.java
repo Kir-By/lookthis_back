@@ -74,40 +74,4 @@ public class CloudDataConfig extends AbstractCloudConfig {
     public JdbcTemplate mysqlJdbcTemplate(@Qualifier("dsMysql") DataSource dsSlave) {
         return new JdbcTemplate(dsSlave);
     }
-
-    @Bean(name = "dsCubrid")
-    public DataSource cubridDataSource() {
-        try {
-            String vcap_services = System.getenv("VCAP_SERVICES");
-            log.info("==================================");
-            log.info(vcap_services);
-            JSONObject jsonObj = JSONObject.fromObject(vcap_services);
-            JSONArray userPro = jsonObj.getJSONArray("mysql-on-demand");
-            for (int i = 0; i < userPro.size(); i++) {
-                JSONObject service_object = JSONObject.fromObject(userPro.get(i));
-                JSONObject credObj = service_object.getJSONObject("credentials");
-                cubridJdbcUrl = credObj.getString("username");
-                cubridJdbcUrl += ":" + credObj.getString("password");
-                cubridJdbcUrl += ":" + credObj.getString("hostname");
-                cubridJdbcUrl += ":" + credObj.getString("port");
-            }
-            log.info(cubridJdbcUrl);
-            /*String vcap_services = System.getenv("VCAP_SERVICES");
-            JSONObject jsonObj = JSONObject.fromObject(vcap_services);
-            JSONArray userPro = jsonObj.getJSONArray("CubridDB");
-            jsonObj = JSONObject.fromObject(userPro.get(0));
-            jsonObj = jsonObj.getJSONObject("credentials");
-            cubridJdbcUrl = jsonObj.getString("jdbcurl");
-*/
-            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), cubridJdbcUrl);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Bean(name = "jdbcCubrid")
-    @Autowired
-    public JdbcTemplate cubridJdbcTemplate(@Qualifier("dsCubrid") DataSource dsSlave) {
-        return new JdbcTemplate(dsSlave);
-    }
 }

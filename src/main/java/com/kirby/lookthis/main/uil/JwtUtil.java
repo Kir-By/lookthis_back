@@ -1,4 +1,3 @@
-/*
 package com.kirby.lookthis.main.uil;
 
 import io.jsonwebtoken.Claims;
@@ -71,4 +70,3 @@ public class JwtUtil implements Serializable {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }
-*/

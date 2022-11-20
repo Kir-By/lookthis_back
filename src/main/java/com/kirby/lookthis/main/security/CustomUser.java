@@ -1,4 +1,3 @@
-/*
 package com.kirby.lookthis.main.security;
 
 import com.kirby.lookthis.user.entity.User;
@@ -61,4 +60,3 @@ public class CustomUser implements UserDetails {
         return true;
     }
 }
-*/

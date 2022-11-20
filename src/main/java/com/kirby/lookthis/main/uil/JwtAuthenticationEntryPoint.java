@@ -1,4 +1,3 @@
-/*
 package com.kirby.lookthis.main.uil;
 
 import java.io.IOException;
@@ -22,4 +21,4 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
-}*/
+}

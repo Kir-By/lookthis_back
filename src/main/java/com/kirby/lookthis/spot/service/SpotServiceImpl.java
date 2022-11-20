@@ -32,4 +32,9 @@ public class SpotServiceImpl implements SpotService{
 
         return flyerRepository.findFlyerHistoryBySpots(spotList);
     }
+
+    @Override
+    public List<Spot> getSpotList() {
+        return spotRepository.findAll();
+    }
 }
