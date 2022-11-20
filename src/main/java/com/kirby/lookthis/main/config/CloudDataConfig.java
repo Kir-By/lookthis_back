@@ -6,6 +6,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.cloud.Cloud;
 import org.springframework.cloud.CloudFactory;
 import org.springframework.cloud.config.java.AbstractCloudConfig;
@@ -59,13 +60,12 @@ public class CloudDataConfig extends AbstractCloudConfig {
         }
         log.info(cubridJdbcUrl);
 
-        try {
-            return new SimpleDriverDataSource(cubrid.jdbc.driver.CUBRIDDriver.class.newInstance(), "jdbc:mariadb://yzqkfru5f6j0ld6p:2xd0tcwxpnt1ujy3:10.1.2.90:13306/oxoyvt9ppzr3ozzy4mvm", username, password);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        DataSource dataSource = DataSourceBuilder.create()
+                .url("jdbc:mariadb://yzqkfru5f6j0ld6p:2xd0tcwxpnt1ujy3:10.1.2.90:13306/oxoyvt9ppzr3ozzy4mvm")
+                .username(username)
+                .password(password)
+                .build();
+        return dataSource;
 
     }
 
