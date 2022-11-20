@@ -6,6 +6,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.util.Map;
 @Controller
 @Log4j2
 @RequestMapping(value = "/auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LoginController {
 
     @Value("${spring.security.oauth2.client.provider.naver.authorization-uri}")

@@ -30,7 +30,14 @@ public class UserFlyer {
     @JoinColumn(name = "flyer_spot_id")
     private FlyerSpot flyerSpot;
 
+    @Column(updatable = false)
     private LocalDateTime createDate;
+    @Column(updatable = false)
     private LocalDateTime initDate;
 
+    @PrePersist
+    public void defaultInsert() {
+        this.createDate = LocalDateTime.now();
+        this.initDate = LocalDateTime.now().plusDays(1);
+    }
 }

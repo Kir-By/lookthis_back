@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService{
     public User getUser(UserDto userDto) {
         return userRepository.findByUserId(userDto.getUserId());
     }
+
+    @Override
+    public void updatePoint(UserDto userDto) {
+        userRepository.updatePoint(userDto);
+    }
 }

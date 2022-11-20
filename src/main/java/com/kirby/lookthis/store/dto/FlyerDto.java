@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class FlyerDto {
     private Integer flyerId;
     private Integer storeId;
+    private Integer spotId;
     private String path;
     private LocalDateTime createDate;
     private LocalDateTime endValidDate;

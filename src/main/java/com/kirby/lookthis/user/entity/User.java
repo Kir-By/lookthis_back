@@ -41,5 +41,7 @@ public class User {
 	@PrePersist
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
+		this.point = 0;
 	}
+
 }

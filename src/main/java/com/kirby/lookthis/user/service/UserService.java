@@ -8,6 +8,8 @@ public interface UserService {
     void saveUser(UserDto userDto);
     User getUser(UserDto userDto);
 
+    void updatePoint(UserDto userDto);
+
     default UserDto userEntityToDto(User user){
         UserDto dto = UserDto.builder()
                 .userId(user.getUserId())

@@ -2,6 +2,7 @@ package com.kirby.lookthis.Store.repository;
 
 import com.kirby.lookthis.spot.dto.SpotDto;
 import com.kirby.lookthis.spot.entity.Spot;
+import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.entity.Flyer;
 import com.kirby.lookthis.store.repository.FlyerRepository;
 import lombok.extern.log4j.Log4j2;
@@ -36,7 +37,7 @@ public class FlyerRepositoryTests {
     public void getFlyerListTest() {
         List<Integer> spoList = new ArrayList<>();
         spoList.add(3);
-        List<Flyer> flyerList = flyerRepository.findFlyerBySpots(spoList);
+        List<FlyerDto> flyerList = flyerRepository.findFlyerBySpots(spoList);
         flyerList.stream().forEach(flyer -> log.info(flyer));
 
     }
