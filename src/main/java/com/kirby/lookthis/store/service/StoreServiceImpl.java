@@ -12,6 +12,7 @@ import com.kirby.lookthis.store.entity.Store;
 import com.kirby.lookthis.store.repository.FlyerRepository;
 import com.kirby.lookthis.store.repository.FlyerSpotRepository;
 import com.kirby.lookthis.store.repository.StoreRepository;
+import com.kirby.lookthis.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -46,4 +47,13 @@ public class StoreServiceImpl implements StoreService{
         flyerSpotRepository.save(flyerSpot);
     }
 
+    @Override
+    public List<Flyer> getStoreFlyerList(StoreDto storeDto) {
+        return flyerRepository.getStoreFlyerList(storeDto);
+    }
+
+    @Override
+    public List<Store> getStoreList(UserDto userDto) {
+        return storeRepository.getStoreList(userDto);
+    }
 }

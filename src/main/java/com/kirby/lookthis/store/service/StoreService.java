@@ -8,6 +8,7 @@ import com.kirby.lookthis.store.dto.StoreDto;
 import com.kirby.lookthis.store.entity.Flyer;
 import com.kirby.lookthis.store.entity.FlyerSpot;
 import com.kirby.lookthis.store.entity.Store;
+import com.kirby.lookthis.user.dto.UserDto;
 import com.kirby.lookthis.user.entity.User;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public interface StoreService {
     void insertStore(StoreDto storeDto);
     void insertFlyer(FlyerDto flyerDto);
     void insertFlyerSpot(FlyerSpotDto flyerSpotDto);
+
+    List<Flyer> getStoreFlyerList(StoreDto storeDto);
+
+    List<Store> getStoreList(UserDto userDto);
 
     default Store storeDtoToEntity(StoreDto storeDto){
         User user = User.builder()

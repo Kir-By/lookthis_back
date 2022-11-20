@@ -4,13 +4,16 @@ import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
 import com.kirby.lookthis.spot.dto.PointDto;
 import com.kirby.lookthis.store.dto.StoreDto;
+import com.kirby.lookthis.store.entity.Flyer;
+import com.kirby.lookthis.store.entity.Store;
 import com.kirby.lookthis.store.service.StoreService;
+import com.kirby.lookthis.user.dto.UserDto;
+import com.kirby.lookthis.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Log4j2
@@ -33,6 +36,18 @@ public class StoreController {
     @PutMapping(value = "/insertFlyerSpot", produces = "application/json")
     public void insertFlyerSpot(@RequestBody FlyerSpotDto flyerSpotDto) {
         storeService.insertFlyerSpot(flyerSpotDto);
+    }
+
+    @PostMapping(value = "/getStoreFlyerList", produces = "application/json")
+    public List<Flyer> getStoreFlyerList(@RequestBody StoreDto storeDto){
+
+        return storeService.getStoreFlyerList(storeDto);
+    }
+
+    @PostMapping(value = "/getStoreList", produces = "application/json")
+    public List<Store> getStoreList(@RequestBody UserDto userDto){
+
+        return storeService.getStoreList(userDto);
     }
 
 }

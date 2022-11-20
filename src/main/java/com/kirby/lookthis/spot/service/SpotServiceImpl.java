@@ -5,7 +5,6 @@ import com.kirby.lookthis.spot.dto.SpotDto;
 import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.spot.repository.SpotRepository;
 import com.kirby.lookthis.store.dto.FlyerDto;
-import com.kirby.lookthis.store.entity.Flyer;
 import com.kirby.lookthis.store.entity.FlyerSpot;
 import com.kirby.lookthis.store.entity.UserFlyer;
 import com.kirby.lookthis.store.repository.FlyerRepository;
@@ -17,6 +16,7 @@ import com.kirby.lookthis.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -51,6 +51,7 @@ public class SpotServiceImpl implements SpotService{
     }
 
     @Override
+    @Transactional
     public String insertPoint(PointDto pointDto) {
         UserDto userDto = new UserDto();
         userDto.setUserId(pointDto.userId);
@@ -58,7 +59,9 @@ public class SpotServiceImpl implements SpotService{
         userDto.setPoint(user.getPoint() + pointDto.getPoint());
         userRepository.updatePoint(userDto);
 
-        pointDto.setFlyerSpotId(flyerSpotRepository.findIdByFlyerAndSpot(pointDto).get(0));
+        Integer flyerSpotId = flyerSpotRepository.getFlyerSpotId(pointDto).get(0).getFlyerSpotId();
+
+        pointDto.setFlyerSpotId(flyerSpotId);
 
         FlyerSpot flyerSpot = FlyerSpot.builder()
                 .flyerSpotId(pointDto.flyerSpotId)

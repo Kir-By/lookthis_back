@@ -3,7 +3,9 @@ package com.kirby.lookthis.store.repository;
 import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
+import com.kirby.lookthis.store.dto.StoreDto;
 import com.kirby.lookthis.store.entity.Flyer;
+import com.kirby.lookthis.user.dto.UserDto;
 import com.kirby.lookthis.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +28,8 @@ public interface FlyerRepository extends JpaRepository<Flyer, Integer> {
             "where fs.spot.spotId IN (:#{#spots}) " +
             "AND us.user.userId is not null ")
     List<FlyerDto> findFlyerHistoryBySpots(@Param("spots") List<Integer> spots);
+
+    @Query("select f from Flyer f " +
+            "where f.storeId = :#{#storeDto.storeId} ")
+    List<Flyer> getStoreFlyerList(@Param("storeDto") StoreDto storeDto);
 }
