@@ -31,20 +31,6 @@ public class LoginController {
     @Value("${spring.security.oauth2.client.registration.naver.client-secret}")
     String clientSecret;
 
-    @GetMapping(value = "/api/naver/oauth")
-    public String naverConnect() {
-        SecureRandom random = new SecureRandom();
-        String state = new BigInteger(130, random).toString(32);
-
-        StringBuilder url = new StringBuilder();
-        url.append(NAVER_AUTH_URI + "?");
-        url.append("client_id=" + clientId);
-        url.append("&response_type=code");
-        url.append("&redirect_url=https://lookthis-back.nhncloud.paas-ta.com/auth/api/naver/callback");
-        url.append("&state=" + state);
-        return "redirect:" + url;
-    }
-
     @GetMapping(value = "/api/naver/callback")
     public String naverLogin(String code, String state) {
         log.info("test");
