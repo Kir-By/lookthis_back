@@ -2,13 +2,11 @@ package com.kirby.lookthis.store.controller;
 
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
-import com.kirby.lookthis.spot.dto.PointDto;
 import com.kirby.lookthis.store.dto.StoreDto;
 import com.kirby.lookthis.store.entity.Flyer;
 import com.kirby.lookthis.store.entity.Store;
 import com.kirby.lookthis.store.service.StoreService;
 import com.kirby.lookthis.user.dto.UserDto;
-import com.kirby.lookthis.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +21,8 @@ public class StoreController {
 
     private final StoreService storeService;
 
+    private String S3Bucket = "lookthis";
+
     @PutMapping(value = "/saveStore", produces = "application/json")
     public void insertStore(@RequestBody StoreDto storeDto) {
         storeService.insertStore(storeDto);
@@ -30,6 +30,9 @@ public class StoreController {
 
     @PutMapping(value = "/saveFlyer", produces = "application/json")
     public void insertFlyer(@RequestBody FlyerDto flyerDto) {
+
+        Integer flyerId = flyerDto.getFlyerId();
+        String path = "/" + flyerId + "/";
         storeService.insertFlyer(flyerDto);
     }
 
