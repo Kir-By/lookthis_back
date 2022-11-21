@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -17,7 +16,7 @@ import java.util.function.Function;
 public class JwtUtil implements Serializable {
     private static final long serialVersionUID = -2550185165626007488L;
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-    @Value("kirBy")
+    @Value("${jwt.secret}")
     private String secret;
 
     //retrieve username from jwt token
@@ -47,8 +46,7 @@ public class JwtUtil implements Serializable {
     }
 
     //generate token for user
-    public String generateToken(String id) {
-        Map<String, Object> claims = new HashMap<>();
+    public String generateToken(Map<String, Object> claims, String id) {
         return doGenerateToken(claims, id);
     }
 
@@ -61,7 +59,7 @@ public class JwtUtil implements Serializable {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 //.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .setExpiration(new Date(System.currentTimeMillis() + 5 * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 
     //validate token

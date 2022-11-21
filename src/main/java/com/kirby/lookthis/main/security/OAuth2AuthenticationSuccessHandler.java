@@ -1,7 +1,6 @@
 package com.kirby.lookthis.main.security;
 
 import com.kirby.lookthis.main.uil.JwtUtil;
-import com.kirby.lookthis.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -9,10 +8,10 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -29,7 +28,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         Map<String, Object> naver_account = (Map<String, Object>) oAuth2User.getAttributes();
         String id = (String) naver_account.get("id");
-        String jwt = jwtUtil.generateToken(id);
+        String name = (String) naver_account.get("name");
+        Map<String, Object> jwtInfo = new HashMap<>();
+        jwtInfo.put("userId", id);
+        jwtInfo.put("name", name);
+
+        String jwt = jwtUtil.generateToken(jwtInfo, id);
 
         String url = makeRedirectUrl(jwt);
         System.out.println("url: " + url);
