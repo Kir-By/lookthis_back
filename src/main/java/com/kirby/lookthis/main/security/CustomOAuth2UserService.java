@@ -54,10 +54,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .password("NAVER")
                 .build();
 
-        if (userRepository.findById(id).isEmpty()) {
-            userRepository.save(user);
-        } else {
+        if (userRepository.findById(id).isPresent()) {
             System.out.println("가입한적 있음.");
+        } else {
+            userRepository.save(user);
         }
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("ROLE_MEMBER")), naver_account, "id");
