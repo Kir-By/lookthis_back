@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Log4j2
@@ -32,21 +33,31 @@ public class StoreController {
     private String S3Bucket = "lookthis";
 
     @PutMapping(value = "/saveStore", produces = "application/json")
-    public void insertStore(@RequestBody StoreDto storeDto) {
-        storeService.insertStore(storeDto);
+    public Integer insertStore(@RequestBody StoreDto storeDto) {
+       Integer storeId = storeService.insertStore(storeDto);
+        if(storeId == null){
+            return 0;
+        }
+       return storeId;
     }
 
     @PutMapping(value = "/saveFlyer", consumes = {"multipart/form-data"})
-    public void insertFlyer(@ModelAttribute FlyerDto flyerDto, @ModelAttribute MultipartFile flyerFile) throws IOException {
+    public Integer insertFlyer(@ModelAttribute FlyerDto flyerDto, @ModelAttribute MultipartFile flyerFile) throws IOException {
+
+        String uuid = UUID.randomUUID().toString();
 
         Integer storeId = flyerDto.getStoreId();
 
         String flyerName = flyerFile.getOriginalFilename();
         Integer year = LocalDate.now().getYear();
         String day = LocalDate.now().getMonthValue() + "" + LocalDate.now().getDayOfMonth();
-        String path = "/" + storeId + "/" + year + "/" + day + "/" + flyerName;
+        String path = "/" + storeId + "/" + year + "/" + day + "/lookthis_"+ uuid + flyerName;
         flyerDto.setPath(path);
-        storeService.insertFlyer(flyerDto);
+        Integer flyerId = storeService.insertFlyer(flyerDto);
+
+        if(flyerId == null){
+            return 0;
+        }
 
         long size = flyerFile.getSize();
         ObjectMetadata objectMetaData = new ObjectMetadata();
@@ -59,6 +70,7 @@ public class StoreController {
                         .withCannedAcl(CannedAccessControlList.PublicRead)
         );
 
+        return flyerId;
     }
 
     @PutMapping(value = "/insertFlyerSpot", produces = "application/json")
