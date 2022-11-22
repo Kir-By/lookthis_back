@@ -18,5 +18,4 @@ public class FlyerDto {
     private LocalDateTime createDate;
     private LocalDateTime endValidDate;
     private Integer status;
-    private MultipartFile flyerFile;
 }
