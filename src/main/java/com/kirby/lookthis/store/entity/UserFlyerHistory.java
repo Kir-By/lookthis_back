@@ -1,6 +1,5 @@
 package com.kirby.lookthis.store.entity;
 
-import com.kirby.lookthis.user.entity.User;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -18,19 +17,12 @@ import java.time.LocalDateTime;
 public class UserFlyerHistory {
 
     @Id
-    @Column(name = "user_flyer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer OID;
     private Integer userFlyerId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flyer_spot_id")
-    private FlyerSpot flyerSpot;
-
+    private String user_id;
+    private Integer flyer_spot_id;
     private LocalDateTime createDate;
-    private LocalDateTime initDate;
+    private Integer point;
 
 }

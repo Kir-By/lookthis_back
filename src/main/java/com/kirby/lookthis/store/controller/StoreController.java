@@ -32,7 +32,7 @@ public class StoreController {
 
     private String S3Bucket = "lookthis";
 
-    @PutMapping(value = "/saveStore", produces = "application/json")
+    @PutMapping(value = "store/saveStore", produces = "application/json")
     public Integer insertStore(@RequestBody StoreDto storeDto) {
        Integer storeId = storeService.insertStore(storeDto);
         if(storeId == null){
@@ -41,7 +41,7 @@ public class StoreController {
        return storeId;
     }
 
-    @PutMapping(value = "/saveFlyer", consumes = {"multipart/form-data"})
+    @PutMapping(value = "store/saveFlyer", consumes = {"multipart/form-data"})
     public Integer insertFlyer(@ModelAttribute FlyerDto flyerDto, @ModelAttribute MultipartFile flyerFile) throws IOException {
 
         String uuid = UUID.randomUUID().toString();
@@ -51,7 +51,7 @@ public class StoreController {
         String flyerName = flyerFile.getOriginalFilename();
         Integer year = LocalDate.now().getYear();
         String day = LocalDate.now().getMonthValue() + "" + LocalDate.now().getDayOfMonth();
-        String path = "/" + storeId + "/" + year + "/" + day + "/lookthis_"+ uuid + flyerName;
+        String path = "/" + storeId + "/" + year + "/" + day + "/lookthis_"+ uuid + "_" + flyerName;
         flyerDto.setPath(path);
         Integer flyerId = storeService.insertFlyer(flyerDto);
 
@@ -73,18 +73,18 @@ public class StoreController {
         return flyerId;
     }
 
-    @PutMapping(value = "/insertFlyerSpot", produces = "application/json")
+    @PutMapping(value = "store/insertFlyerSpot", produces = "application/json")
     public void insertFlyerSpot(@RequestBody FlyerSpotDto flyerSpotDto) {
         storeService.insertFlyerSpot(flyerSpotDto);
     }
 
-    @PostMapping(value = "/getStoreFlyerList", produces = "application/json")
+    @PostMapping(value = "store/getStoreFlyerList", produces = "application/json")
     public List<Flyer> getStoreFlyerList(@RequestBody StoreDto storeDto){
 
         return storeService.getStoreFlyerList(storeDto);
     }
 
-    @PostMapping(value = "/getStoreList", produces = "application/json")
+    @PostMapping(value = "store/getStoreList", produces = "application/json")
     public List<Store> getStoreList(@RequestBody UserDto userDto){
 
         return storeService.getStoreList(userDto);

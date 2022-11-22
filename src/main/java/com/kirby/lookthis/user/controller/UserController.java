@@ -18,13 +18,13 @@ public class UserController {
 
 	private final UserService userService;
 
-	@PostMapping(value = "/getUser", produces = "application/json")
+	@PostMapping(value = "user/getUser", produces = "application/json")
 	public User getUser(@RequestBody UserDto userDto) {
 		log.info(userDto.toString());
 		return userService.getUser(userDto);
 	}
 
-	@PutMapping(value="/saveUser", produces = "application/json")
+	@PutMapping(value="user/saveUser", produces = "application/json")
 	public void insertUser(@RequestBody UserDto userDto) {
 		log.info(userDto.toString());
 		userService.saveUser(userDto);
