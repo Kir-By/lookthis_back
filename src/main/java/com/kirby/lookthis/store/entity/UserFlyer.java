@@ -3,6 +3,8 @@ package com.kirby.lookthis.store.entity;
 import com.kirby.lookthis.user.entity.User;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,6 +29,7 @@ public class UserFlyer {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "flyer_spot_id")
     private FlyerSpot flyerSpot;
 

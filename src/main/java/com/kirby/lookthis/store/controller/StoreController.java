@@ -97,4 +97,10 @@ public class StoreController {
         return storeService.getFlyerSpotList(flyerDto);
     }
 
+    @DeleteMapping(value = "store/deleteFlyerSpot", produces = "application/josn")
+    public String deleteFlyerSpot(@RequestBody FlyerSpotDto flyerSpotDto){
+
+        return storeService.deleteFlyerSpot(flyerSpotDto);
+    }
+
 }

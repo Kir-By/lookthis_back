@@ -11,10 +11,12 @@ import com.kirby.lookthis.store.entity.Store;
 import com.kirby.lookthis.store.repository.FlyerRepository;
 import com.kirby.lookthis.store.repository.FlyerSpotRepository;
 import com.kirby.lookthis.store.repository.StoreRepository;
+import com.kirby.lookthis.store.repository.UserFlyerRepository;
 import com.kirby.lookthis.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class StoreServiceImpl implements StoreService{
     private final FlyerRepository flyerRepository;
     private final FlyerSpotRepository flyerSpotRepository;
     private final SpotRepository spotRepository;
+    private final UserFlyerRepository userFlyerRepository;
 
     @Override
     public Integer insertStore(StoreDto storeDto) {
@@ -59,5 +62,14 @@ public class StoreServiceImpl implements StoreService{
     @Override
     public List<Spot> getFlyerSpotList(FlyerDto flyerDto) {
         return spotRepository.getFlyerSpotList(flyerDto);
+    }
+
+    @Transactional
+    @Override
+    public String deleteFlyerSpot(FlyerSpotDto flyerSpotDto) {
+        Integer flyerSpotId = flyerSpotRepository.getFlyerSpotIdForDelete(flyerSpotDto);
+        userFlyerRepository.deleteByFlyerSpotFlyerSpotId(flyerSpotId);
+        flyerSpotRepository.deleteById(flyerSpotId);
+        return "success";
     }
 }
