@@ -1,5 +1,6 @@
 package com.kirby.lookthis.store.service;
 
+import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.spot.repository.SpotRepository;
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
@@ -53,5 +54,10 @@ public class StoreServiceImpl implements StoreService{
     @Override
     public List<Store> getStoreList(UserDto userDto) {
         return storeRepository.getStoreList(userDto);
+    }
+
+    @Override
+    public List<Spot> getFlyerSpotList(FlyerDto flyerDto) {
+        return spotRepository.getFlyerSpotList(flyerDto);
     }
 }
