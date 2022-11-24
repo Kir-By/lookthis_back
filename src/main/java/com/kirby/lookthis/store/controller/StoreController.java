@@ -96,9 +96,8 @@ public class StoreController {
         return storeService.getFlyerSpotList(flyerDto);
     }
 
-    @PostMapping(value = "store/deleteFlyerSpot", produces = "application/josn")
+    @PostMapping(value = "store/deleteFlyerSpot", produces = "application/json")
     public String deleteFlyerSpot(@RequestBody FlyerSpotDto flyerSpotDto){
-
         return storeService.deleteFlyerSpot(flyerSpotDto);
     }
 
