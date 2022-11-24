@@ -10,10 +10,11 @@ import java.util.List;
 public interface UserService {
 
     void saveUser(UserDto userDto);
-    User getUser(UserDto userDto);
+    UserDto getUser(UserDto userDto);
 
     void updatePoint(UserDto userDto);
     List<PointHistory> getPointHistoryList(PointDto pointDto);
+    String saveFcmToken(UserDto userDto);
 
     default UserDto userEntityToDto(User user){
         UserDto dto = UserDto.builder()

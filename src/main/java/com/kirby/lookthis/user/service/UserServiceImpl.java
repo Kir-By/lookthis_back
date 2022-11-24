@@ -29,8 +29,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUser(UserDto userDto) {
-        return userRepository.findByUserId(userDto.getUserId());
+    public UserDto getUser(UserDto userDto) {
+        User user = userRepository.findByUserId(userDto.getUserId());
+        userDto.setPoint(user.getPoint());
+        userDto.setName(user.getName());
+        userDto.setBirth(user.getBirth());
+        userDto.setFcmToken(user.getFcmToken());
+        return userDto;
     }
 
     @Override
@@ -43,5 +48,11 @@ public class UserServiceImpl implements UserService{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
         LocalDateTime searchDate = LocalDateTime.parse(pointDto.searchDate+" 00", formatter);
         return pointHistoryRepository.getPointHistoryList(pointDto.userId, searchDate);
+    }
+
+    @Override
+    public String saveFcmToken(UserDto userDto) {
+        userRepository.saveFcmToken(userDto);
+        return "Success";
     }
 }

@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<User, String>{
             "where u.userId = :#{#userDto.userId}" )
     void updatePoint(@Param("userDto") UserDto userDto);
 
+    @Query("update User u set u.fcmToken = :#{#userDto.fcmToken} " +
+            "where u.userId = :#{#userDto.userId}")
+    void saveFcmToken(UserDto userDto);
 }

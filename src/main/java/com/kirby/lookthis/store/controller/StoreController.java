@@ -9,7 +9,6 @@ import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
 import com.kirby.lookthis.store.dto.StoreDto;
 import com.kirby.lookthis.store.entity.Flyer;
-import com.kirby.lookthis.store.entity.FlyerSpot;
 import com.kirby.lookthis.store.entity.Store;
 import com.kirby.lookthis.store.service.StoreService;
 import com.kirby.lookthis.user.dto.UserDto;
@@ -97,7 +96,7 @@ public class StoreController {
         return storeService.getFlyerSpotList(flyerDto);
     }
 
-    @DeleteMapping(value = "store/deleteFlyerSpot", produces = "application/josn")
+    @PostMapping(value = "store/deleteFlyerSpot", produces = "application/josn")
     public String deleteFlyerSpot(@RequestBody FlyerSpotDto flyerSpotDto){
 
         return storeService.deleteFlyerSpot(flyerSpotDto);
