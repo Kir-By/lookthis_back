@@ -1,7 +1,11 @@
 package com.kirby.lookthis.user.service;
 
+import com.kirby.lookthis.spot.dto.PointDto;
 import com.kirby.lookthis.user.dto.UserDto;
+import com.kirby.lookthis.user.entity.PointHistory;
 import com.kirby.lookthis.user.entity.User;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -9,6 +13,7 @@ public interface UserService {
     User getUser(UserDto userDto);
 
     void updatePoint(UserDto userDto);
+    List<PointHistory> getPointHistoryList(PointDto pointDto);
 
     default UserDto userEntityToDto(User user){
         UserDto dto = UserDto.builder()

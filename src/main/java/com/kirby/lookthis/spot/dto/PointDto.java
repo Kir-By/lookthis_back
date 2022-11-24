@@ -14,4 +14,9 @@ public class PointDto {
     public Integer spotId;
     public Integer flyerSpotId;
 
+    public String spotName;
+    public Integer storeId;
+    public String storeName;
+    public String searchDate;
+
 }

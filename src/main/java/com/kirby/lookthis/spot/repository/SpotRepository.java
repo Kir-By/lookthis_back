@@ -15,4 +15,6 @@ public interface SpotRepository extends JpaRepository<Spot, Integer> {
             "where ABS(s.lat - :#{#spotDto.lat}) < 0.0005 " +
             "and ABS(s.lng - :#{#spotDto.lng}) < 0.0005 ")
     List<Integer> getSpotListBySpotDto(@Param("spotDto") SpotDto spotDto);
+
+    Spot findSpotBySpotId(Integer spotId);
 }
