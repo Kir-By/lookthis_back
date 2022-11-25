@@ -24,6 +24,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
 
+        System.out.println(request.getRemoteHost());
+        System.out.println(request.getRequestURL());
+        System.out.println(request.getContextPath());
+        System.out.println(authentication.getDetails());
+
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
         Map<String, Object> naver_account = (Map<String, Object>) oAuth2User.getAttributes();
