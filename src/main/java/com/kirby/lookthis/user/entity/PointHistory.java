@@ -1,4 +1,4 @@
-package com.kirby.lookthis.store.entity;
+package com.kirby.lookthis.user.entity;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,15 +14,24 @@ import java.time.LocalDateTime;
 @ToString
 @Getter
 @DynamicUpdate
-public class UserFlyerHistory {
+public class PointHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer OID;
-    private Integer userFlyerId;
     private String user_id;
-    private Integer flyer_spot_id;
+    private Integer spotId;
+    private String spotName;
+    private Integer storeId;
+    private String storeName;
+    private Integer flyerId;
     private LocalDateTime createDate;
+    private Integer status;
     private Integer point;
+
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
 
 }

@@ -14,4 +14,6 @@ import java.util.List;
 public interface UserFlyerRepository extends JpaRepository<UserFlyer, Integer> {
     void deleteUserFlyerByInitDateLessThan(LocalDateTime localDateTime);
     List<UserFlyer> findUserFlyersByInitDateLessThan(LocalDateTime localDateTime);
+
+    void deleteByFlyerSpotFlyerSpotId(Integer flyerSpotId);
 }

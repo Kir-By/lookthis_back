@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.dto.FlyerSpotDto;
 import com.kirby.lookthis.store.dto.StoreDto;
@@ -88,6 +89,16 @@ public class StoreController {
     public List<Store> getStoreList(@RequestBody UserDto userDto){
 
         return storeService.getStoreList(userDto);
+    }
+
+    @PostMapping(value = "store/getFlyerSpotList", produces = "application/json")
+    public List<Spot> getFlyer(@RequestBody FlyerDto flyerDto){
+        return storeService.getFlyerSpotList(flyerDto);
+    }
+
+    @PostMapping(value = "store/deleteFlyerSpot", produces = "application/json")
+    public String deleteFlyerSpot(@RequestBody FlyerSpotDto flyerSpotDto){
+        return storeService.deleteFlyerSpot(flyerSpotDto);
     }
 
 }

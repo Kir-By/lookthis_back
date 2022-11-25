@@ -21,6 +21,9 @@ public interface StoreService {
 
     List<Store> getStoreList(UserDto userDto);
 
+    List<Spot> getFlyerSpotList(FlyerDto flyerDto);
+
+    String deleteFlyerSpot(FlyerSpotDto flyerSpotDto);
     default Store storeDtoToEntity(StoreDto storeDto){
         User user = User.builder()
                 .userId(storeDto.getUserId())
