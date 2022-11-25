@@ -3,6 +3,7 @@ package com.kirby.lookthis.main.security;
 import com.kirby.lookthis.main.uil.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -25,9 +26,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                                         Authentication authentication) throws IOException {
 
         System.out.println(request.getRemoteHost());
-        System.out.println(request.getRequestURL());
+        System.out.println(request.getRequestURI());
         System.out.println(request.getContextPath());
         System.out.println(authentication.getDetails());
+
+
 
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
@@ -39,8 +42,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         jwtInfo.put("name", name);
 
         String jwt = jwtUtil.generateToken(jwtInfo, id);
+        String url = request.getRequestURI();
+        if(url.charAt(url.length() - 1) == '2'){
+            url = makeRedirectUrl2(jwt);
+        }else {
+            url = makeRedirectUrl(jwt);
+        }
 
-        String url = makeRedirectUrl(jwt);
         System.out.println("url: " + url);
 
         if (response.isCommitted()) {
@@ -51,7 +59,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis.nhncloud.paas-ta.com/oauth2/redirect/"+token)
+                .build().toUriString();
+    }
+
+    private String makeRedirectUrl2(String token) {
+        return UriComponentsBuilder.fromUriString("https://lookthis-admin.nhncloud.paas-ta.com/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 }
