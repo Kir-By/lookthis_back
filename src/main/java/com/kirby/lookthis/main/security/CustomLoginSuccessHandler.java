@@ -22,7 +22,7 @@ import java.util.Map;
 @Component
 @Log4j2
 @RequiredArgsConstructor
-public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
+public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
@@ -37,24 +37,19 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         jwtInfo.put("userId", id);
         jwtInfo.put("name", name);
         String jwt = jwtUtil.generateToken(jwtInfo, id);
-        String url = request.getRemoteHost();
-        System.out.println("url: " + url);
+        String url = makeRedirectUrl(request.getHeader("Referer"), jwt);
 
         if (response.isCommitted()) {
             log.debug("응답이 이미 커밋된 상태입니다. " + url + "로 리다이렉트하도록 바꿀 수 없습니다.");
             return;
         }
 
-        response.sendRedirect(url+ "/oauth2/redirect/" + jwt);
+        getRedirectStrategy().sendRedirect(request, response, url);
     }
 
-    private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis.nhncloud.paas-ta.com/oauth2/redirect/"+token)
+    private String makeRedirectUrl(String url, String token) {
+        return UriComponentsBuilder.fromUriString(url + "oauth2/redirect/"+token)
                 .build().toUriString();
     }
 
-    private String makeRedirectUrl2(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis-admin.nhncloud.paas-ta.com/oauth2/redirect/"+token)
-                .build().toUriString();
-    }
 }
