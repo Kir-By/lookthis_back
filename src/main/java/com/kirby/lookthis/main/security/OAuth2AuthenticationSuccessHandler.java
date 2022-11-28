@@ -27,6 +27,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         System.out.println(request.getRemoteHost());
         System.out.println(request.getRequestURI());
         System.out.println(request.getContextPath());
+        System.out.println(request.getServerName());
         System.out.println(authentication.getDetails());
 
 
@@ -59,7 +60,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis.nhncloud.paas-ta.com/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 
