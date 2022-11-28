@@ -1,5 +1,6 @@
 package com.kirby.lookthis.main.config;
 
+import com.kirby.lookthis.main.security.CustomLoginSuccessHandler;
 import com.kirby.lookthis.main.security.CustomOAuth2UserService;
 import com.kirby.lookthis.main.security.OAuth2AuthenticationSuccessHandler;
 import com.kirby.lookthis.main.uil.JwtAuthenticationEntryPoint;
@@ -27,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtRequestFilter jwtRequestFilter;
+    private final CustomLoginSuccessHandler customLoginSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -37,13 +39,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/auth/**").anonymous()
+                .antMatchers("/login/**").anonymous()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .formLogin()
+                .usernameParameter("userId")
+                .passwordParameter("password")
+                .loginProcessingUrl("/login/doLogin")
+                .successHandler(customLoginSuccessHandler)
                 .and()
                 .oauth2Login()
                 .defaultSuccessUrl("/login/oauth2/code/naver")
