@@ -60,7 +60,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis.nhncloud.paas-ta.com/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://localhost:3000/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 
