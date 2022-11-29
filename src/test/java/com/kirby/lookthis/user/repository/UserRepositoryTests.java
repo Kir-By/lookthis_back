@@ -1,5 +1,6 @@
 package com.kirby.lookthis.user.repository;
 
+import com.kirby.lookthis.user.entity.LoginHistory;
 import com.kirby.lookthis.user.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class UserRepositoryTests {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private LoginHistoryRepository loginHistoryRepository;
 
 	@Test
 	public void insertUserTest() {
@@ -34,6 +38,18 @@ public class UserRepositoryTests {
 
 		User user2 = userRepository.findByUserId(user.getUserId());
 		log.info(user2.toString());
+	}
+
+	@Test
+	public void saveLoginHistory() {
+
+		LoginHistory loginHistory = LoginHistory
+				.builder()
+				.status("Login")
+				.platform("Naver")
+				.service("https://lookthis.nhncloud.paas-ta.com")
+				.build();
+		loginHistoryRepository.save(loginHistory);
 	}
 
 	

@@ -2,7 +2,9 @@ package com.kirby.lookthis.main.security;
 
 import com.google.gson.Gson;
 import com.kirby.lookthis.main.uil.JwtUtil;
+import com.kirby.lookthis.user.entity.LoginHistory;
 import com.kirby.lookthis.user.entity.User;
+import com.kirby.lookthis.user.repository.LoginHistoryRepository;
 import com.kirby.lookthis.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +26,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     private final UserRepository userRepository;
+    private final LoginHistoryRepository loginHistoryRepository;
     private final JwtUtil jwtUtil;
 
     @Override
@@ -38,6 +41,16 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         jwtInfo.put("name", name);
         String jwt = jwtUtil.generateToken(jwtInfo, id);
         String url = makeRedirectUrl(request.getHeader("Referer"), jwt);
+
+        LoginHistory loginHistory = LoginHistory
+                .builder()
+                .ipAddress(request.getRemoteAddr())
+                .status("Login")
+                .platform("lookthis")
+                .user_id(id)
+                .service("https://lookthis.nhncloud.paas-ta.com")
+                .build();
+        loginHistoryRepository.save(loginHistory);
 
         if (response.isCommitted()) {
             log.debug("응답이 이미 커밋된 상태입니다. " + url + "로 리다이렉트하도록 바꿀 수 없습니다.");

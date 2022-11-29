@@ -1,6 +1,10 @@
 package com.kirby.lookthis.main.security;
 
 import com.kirby.lookthis.main.uil.JwtUtil;
+import com.kirby.lookthis.user.entity.LoginHistory;
+import com.kirby.lookthis.user.repository.LoginHistoryRepository;
+import com.kirby.lookthis.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,10 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
-    @Autowired
-    JwtUtil jwtUtil;
+    private final LoginHistoryRepository loginHistoryRepository;
+    private final JwtUtil jwtUtil;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -36,8 +40,26 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String jwt = jwtUtil.generateToken(jwtInfo, id);
         String url = request.getRequestURI();
         if(url.charAt(url.length() - 1) == '2'){
+            LoginHistory loginHistory = LoginHistory
+                    .builder()
+                    .ipAddress(request.getRemoteAddr())
+                    .status("Login")
+                    .platform("Naver")
+                    .user_id(id)
+                    .service("https://lookthis-admin.nhncloud.paas-ta.com")
+                    .build();
+            loginHistoryRepository.save(loginHistory);
             url = makeRedirectUrl2(jwt);
         }else {
+            LoginHistory loginHistory = LoginHistory
+                    .builder()
+                    .ipAddress(request.getRemoteAddr())
+                    .status("Login")
+                    .platform("Naver")
+                    .user_id(id)
+                    .service("https://lookthis.nhncloud.paas-ta.com")
+                    .build();
+            loginHistoryRepository.save(loginHistory);
             url = makeRedirectUrl(jwt);
         }
 
