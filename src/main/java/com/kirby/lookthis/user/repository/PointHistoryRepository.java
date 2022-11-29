@@ -11,7 +11,7 @@ public interface PointHistoryRepository extends JpaRepository<PointHistory, Inte
 
     @Query("select ph from PointHistory ph " +
             "where ph.user_id = :userId " +
-            "and ph.createDate > :searchDate")
+            "and ph.createDate > :searchDate order by ph.createDate desc ")
     List<PointHistory> getPointHistoryList(String userId,  LocalDateTime searchDate);
 
 }
