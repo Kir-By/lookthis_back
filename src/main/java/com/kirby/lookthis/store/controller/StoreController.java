@@ -35,7 +35,8 @@ public class StoreController {
 
     @PutMapping(value = "store/saveStore", produces = "application/json")
     public Integer insertStore(@RequestBody StoreDto storeDto) {
-       Integer storeId = storeService.insertStore(storeDto);
+        storeDto.setAuthStatus(true);
+        Integer storeId = storeService.insertStore(storeDto);
         if(storeId == null){
             return 0;
         }
