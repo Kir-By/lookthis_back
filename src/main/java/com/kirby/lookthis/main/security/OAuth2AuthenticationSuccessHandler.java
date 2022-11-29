@@ -3,9 +3,7 @@ package com.kirby.lookthis.main.security;
 import com.kirby.lookthis.main.uil.JwtUtil;
 import com.kirby.lookthis.user.entity.LoginHistory;
 import com.kirby.lookthis.user.repository.LoginHistoryRepository;
-import com.kirby.lookthis.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -71,7 +69,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis-admin.nhncloud.paas-ta.com/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 
