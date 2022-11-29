@@ -1,7 +1,5 @@
 package com.kirby.lookthis.Store.repository;
 
-import com.kirby.lookthis.spot.dto.SpotDto;
-import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.store.dto.FlyerDto;
 import com.kirby.lookthis.store.entity.Flyer;
 import com.kirby.lookthis.store.repository.FlyerRepository;
@@ -37,7 +35,7 @@ public class FlyerRepositoryTests {
     public void getFlyerListTest() {
         List<Integer> spoList = new ArrayList<>();
         spoList.add(3);
-        List<FlyerDto> flyerList = flyerRepository.findFlyerBySpots(spoList);
+        List<FlyerDto> flyerList = flyerRepository.findFlyerBySpots(spoList, "nsw2");
         flyerList.stream().forEach(flyer -> log.info(flyer));
 
     }
