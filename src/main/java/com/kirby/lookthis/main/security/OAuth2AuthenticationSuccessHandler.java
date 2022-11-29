@@ -23,15 +23,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
-
-        System.out.println(request.getRemoteHost());
-        System.out.println(request.getRequestURI());
-        System.out.println(request.getContextPath());
-        System.out.println(request.getServerName());
-        System.out.println(authentication.getDetails());
-
-
-
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
         Map<String, Object> naver_account = (Map<String, Object>) oAuth2User.getAttributes();
@@ -46,11 +37,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         if(url.charAt(url.length() - 1) == '2'){
             url = makeRedirectUrl2(jwt);
         }else {
-            url = makeRedirectUrl(jwt);
+            url = makeRedirectUrl(jwt, request.getHeader("Referer"));
         }
-
-        System.out.println("url: " + url);
-        System.out.println(request.getRemoteHost());
 
         if (response.isCommitted()) {
             logger.debug("응답이 이미 커밋된 상태입니다. " + url + "로 리다이렉트하도록 바꿀 수 없습니다.");
@@ -59,7 +47,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         getRedirectStrategy().sendRedirect(request, response, url);
     }
 
-    private String makeRedirectUrl(String token) {
+    private String makeRedirectUrl(String token, String referer) {
         return UriComponentsBuilder.fromUriString("https://localhost:3000/oauth2/redirect/"+token)
                 .build().toUriString();
     }
