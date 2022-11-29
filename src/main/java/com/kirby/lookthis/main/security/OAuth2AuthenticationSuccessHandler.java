@@ -23,6 +23,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
+
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
         Map<String, Object> naver_account = (Map<String, Object>) oAuth2User.getAttributes();
@@ -37,7 +38,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         if(url.charAt(url.length() - 1) == '2'){
             url = makeRedirectUrl2(jwt);
         }else {
-            url = makeRedirectUrl(jwt, request.getHeader("Referer"));
+            url = makeRedirectUrl(jwt);
         }
 
         if (response.isCommitted()) {
@@ -47,8 +48,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         getRedirectStrategy().sendRedirect(request, response, url);
     }
 
-    private String makeRedirectUrl(String token, String referer) {
-        return UriComponentsBuilder.fromUriString(referer +"/oauth2/redirect/"+token)
+    private String makeRedirectUrl(String token) {
+        return UriComponentsBuilder.fromUriString("https://lookthis.nhncloud.paas-ta.com/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 
