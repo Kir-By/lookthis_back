@@ -24,8 +24,7 @@ public interface FlyerRepository extends JpaRepository<Flyer, Integer> {
     @Query("select distinct new com.kirby.lookthis.store.dto.FlyerDto(f.flyerId, f.storeId, fs.spot.spotId, f.path, f.createDate, f.endValidDate, f.status) from Flyer f " +
             "left join FlyerSpot fs on f.flyerId = fs.flyer.flyerId " +
             "left join UserFlyer us on fs.flyerSpotId = us.flyerSpot.flyerSpotId " +
-            "where fs.spot.spotId IN (:#{#spots}) " +
-            "AND fs.flyer.flyerId in (select f2.flyerId from Flyer f2 " +
+            "where fs.flyer.flyerId in (select f2.flyerId from Flyer f2 " +
             "left join FlyerSpot fs2 on f2.flyerId = fs2.flyer.flyerId " +
             "left join UserFlyer us2 on fs2.flyerSpotId = us2.flyerSpot.flyerSpotId " +
             "where us2.user.userId = :userId) ")
