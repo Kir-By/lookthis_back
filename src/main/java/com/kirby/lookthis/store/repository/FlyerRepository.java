@@ -27,7 +27,7 @@ public interface FlyerRepository extends JpaRepository<Flyer, Integer> {
             "where fs.flyer.flyerId in (select f2.flyerId from Flyer f2 " +
             "left join FlyerSpot fs2 on f2.flyerId = fs2.flyer.flyerId " +
             "left join UserFlyer us2 on fs2.flyerSpotId = us2.flyerSpot.flyerSpotId " +
-            "where us2.user.userId = :userId) ")
+            "where us2.user.userId = :userId order by us2.createDate desc ) ")
     List<FlyerDto> findFlyerHistoryBySpots(String userId);
 
     @Query("select f from Flyer f " +
