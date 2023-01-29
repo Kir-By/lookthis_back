@@ -48,7 +48,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
                 .status("Login")
                 .platform("lookthis")
                 .user_id(id)
-                .service("https://lookthis.nhncloud.paas-ta.com")
+                .service("http://lookthis.ml")
                 .build();
         loginHistoryRepository.save(loginHistory);
 

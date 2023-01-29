@@ -42,10 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/auth/**").anonymous()
-                .antMatchers("/login/**").anonymous()
+                .antMatchers("/api/auth/**").anonymous()
+                .antMatchers("/api/login/**").anonymous()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/api//**").authenticated()
                 .and()
                 .cors()
                 .configurationSource(corsConfigurationSource())
@@ -58,11 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .usernameParameter("userId")
                 .passwordParameter("password")
-                .loginProcessingUrl("/login/doLogin")
+                .loginProcessingUrl("/api/login/doLogin")
                 .successHandler(customLoginSuccessHandler)
+                .failureUrl("/api/")
                 .and()
                 .oauth2Login()
-                .defaultSuccessUrl("/login/oauth2/code/naver")
+                .defaultSuccessUrl("/api/login/oauth2/code/naver")
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .userInfoEndpoint().userService(customOAuth2UserService);
 
@@ -80,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/api/**", configuration);
         return source;
     }
 
