@@ -42,10 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/api/auth/**").anonymous()
-                .antMatchers("/api/login/**").anonymous()
+                .antMatchers("/auth/**").anonymous()
+                .antMatchers("/login/**").anonymous()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/api//**").authenticated()
+                .antMatchers("/**").authenticated()
                 .and()
                 .cors()
                 .configurationSource(corsConfigurationSource())
