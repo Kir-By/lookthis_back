@@ -58,12 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .usernameParameter("userId")
                 .passwordParameter("password")
-                .loginProcessingUrl("/api/login/doLogin")
+                .loginProcessingUrl("/login/doLogin")
                 .successHandler(customLoginSuccessHandler)
-                .failureUrl("/api/")
+                .failureUrl("/")
                 .and()
                 .oauth2Login()
-                .defaultSuccessUrl("/api/login/oauth2/code/naver")
+                .defaultSuccessUrl("/login/oauth2/code/naver")
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .userInfoEndpoint().userService(customOAuth2UserService);
 
@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/api/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 

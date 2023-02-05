@@ -31,7 +31,7 @@ public class LoginController {
     @Value("${spring.security.oauth2.client.registration.naver.client-secret}")
     String clientSecret;
 
-    @GetMapping(value = "/api/naver/callback")
+    @GetMapping(value = "/naver/callback")
     public String naverLogin(String code, String state) {
         log.info("test");
         WebClient webClient = WebClient.builder()
