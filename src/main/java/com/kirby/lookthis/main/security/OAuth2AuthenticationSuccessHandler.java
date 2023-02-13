@@ -44,7 +44,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                     .status("Login")
                     .platform("Naver")
                     .user_id(id)
-                    .service("https://lookthis-admin.nhncloud.paas-ta.com")
+                    .service("http://localhost:3000")
                     .build();
             loginHistoryRepository.save(loginHistory);
             url = makeRedirectUrl2(jwt);
@@ -74,7 +74,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl2(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis-admin.nhncloud.paas-ta.com/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 }

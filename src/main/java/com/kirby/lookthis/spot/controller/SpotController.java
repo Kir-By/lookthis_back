@@ -20,7 +20,7 @@ public class SpotController {
     private final SpotService spotService;
     private final UserService userService;
 
-    @PostMapping(value = "spot/getFlyerList")
+    @PostMapping(value = "spots")
     public List<FlyerDto> getFlyerList(@RequestBody SpotDto spotDto) {
 
         return spotService.getFlyerList(spotDto);
