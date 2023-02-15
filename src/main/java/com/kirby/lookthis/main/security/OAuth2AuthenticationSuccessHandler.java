@@ -69,12 +69,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis-front-client.vercel.app//oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis-front-client.vercel.app/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 
     private String makeRedirectUrl2(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis-admin.nhncloud.paas-ta.com/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis-front-admin-nine.vercel.app/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 }
