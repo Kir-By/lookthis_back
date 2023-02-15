@@ -32,7 +32,7 @@ public class SpotController {
         return spotService.getFlyerHistoryList(spotDto);
     }
 
-    @PostMapping(value = "spot/getSpotList")
+    @GetMapping(value = "spots")
     public List<Spot> getSpotList() {
         return spotService.getSpotList();
     }

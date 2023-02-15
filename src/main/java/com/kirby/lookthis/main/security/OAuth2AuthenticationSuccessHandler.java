@@ -44,7 +44,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                     .status("Login")
                     .platform("Naver")
                     .user_id(id)
-                    .service("http://localhost:3000")
+                    .service("https://lookthis-front-client.vercel.app")
                     .build();
             loginHistoryRepository.save(loginHistory);
             url = makeRedirectUrl2(jwt);
@@ -55,7 +55,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                     .status("Login")
                     .platform("Naver")
                     .user_id(id)
-                    .service("http://lookthis.co.kr")
+                    .service("https://lookthis-front-admin-nine.vercel.app")
                     .build();
             loginHistoryRepository.save(loginHistory);
             url = makeRedirectUrl(jwt);
@@ -69,12 +69,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis-front-client.vercel.app//oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis-front-client.vercel.app/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 
     private String makeRedirectUrl2(String token) {
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis-front-admin-nine.vercel.app/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 }
