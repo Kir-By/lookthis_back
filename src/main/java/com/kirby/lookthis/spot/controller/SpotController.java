@@ -20,14 +20,14 @@ public class SpotController {
     private final SpotService spotService;
     private final UserService userService;
 
-    @PostMapping(value = "spots")
-    public List<FlyerDto> getFlyerList(@RequestBody SpotDto spotDto) {
+    @GetMapping(value = "spot/flyers")
+    public List<FlyerDto> getFlyerList(SpotDto spotDto) {
 
         return spotService.getFlyerList(spotDto);
     }
 
-    @PostMapping(value = "spot/getFlyerHistoryList")
-    public List<FlyerDto> getFlyerHistoryList(@RequestBody SpotDto spotDto) {
+    @GetMapping(value = "spot/history/flyers")
+    public List<FlyerDto> getFlyerHistoryList(SpotDto spotDto) {
 
         return spotService.getFlyerHistoryList(spotDto);
     }
@@ -37,7 +37,7 @@ public class SpotController {
         return spotService.getSpotList();
     }
 
-    @PutMapping(value = "spot/insertPoint", produces = "application/json")
+    @PutMapping(value = "spot/point", produces = "application/json")
     public String insertPoint(@RequestBody PointDto pointDto) {
 
         return spotService.insertPoint(pointDto);

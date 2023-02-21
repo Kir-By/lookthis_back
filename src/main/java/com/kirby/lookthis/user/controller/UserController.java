@@ -20,20 +20,20 @@ public class UserController {
 
 	private final UserService userService;
 
-	@PostMapping(value = "user/getUser", produces = "application/json")
-	public UserDto getUser(@RequestBody UserDto userDto) {
+	@GetMapping(value = "user", produces = "application/json")
+	public UserDto getUser(UserDto userDto) {
 		log.info(userDto.toString());
 		return userService.getUser(userDto);
 	}
 
-	@PutMapping(value="user/saveUser", produces = "application/json")
+	@PutMapping(value="user", produces = "application/json")
 	public void insertUser(@RequestBody UserDto userDto) {
 		log.info(userDto.toString());
 		userService.saveUser(userDto);
 	}
 
-	@PostMapping(value = "user/getPointHistoryList", produces = "application/json")
-	public List<PointHistory> getPointHistoryList(@RequestBody PointDto pointDto){
+	@GetMapping(value = "user/history/points", produces = "application/json")
+	public List<PointHistory> getPointHistoryList(PointDto pointDto){
 		return userService.getPointHistoryList(pointDto);
 	}
 
