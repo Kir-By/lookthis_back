@@ -1,5 +1,7 @@
 package com.kirby.lookthis.main.security;
 
+import com.kirby.lookthis.main.entity.RefreshToken;
+import com.kirby.lookthis.main.repository.RefreshTokenRepository;
 import com.kirby.lookthis.main.uil.JwtUtil;
 import com.kirby.lookthis.user.entity.LoginHistory;
 import com.kirby.lookthis.user.repository.LoginHistoryRepository;
@@ -20,6 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final LoginHistoryRepository loginHistoryRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
     private final JwtUtil jwtUtil;
 
     @Override
@@ -37,6 +40,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String jwt = jwtUtil.generateToken(jwtInfo, id);
         String url = request.getRequestURI();
+
+        /*refresh 토큰 저장*/
+        String refreshJwt = jwtUtil.generateRefreshToken(jwtInfo, id);
+        RefreshToken refreshToken = RefreshToken.builder()
+                .refreshToken(refreshJwt)
+                .user_id(id)
+                .build();
+        refreshTokenRepository.save(refreshToken);
+
         if(url.charAt(url.length() - 1) == '2'){
             LoginHistory loginHistory = LoginHistory
                     .builder()

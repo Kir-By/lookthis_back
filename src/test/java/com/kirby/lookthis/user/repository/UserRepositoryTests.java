@@ -47,7 +47,7 @@ public class UserRepositoryTests {
 				.builder()
 				.status("Login")
 				.platform("Naver")
-				.service("http://lookthis.co.kr")
+				.service("https://lookthis.co.kr")
 				.build();
 		loginHistoryRepository.save(loginHistory);
 	}

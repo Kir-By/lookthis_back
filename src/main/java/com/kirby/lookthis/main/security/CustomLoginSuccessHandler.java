@@ -1,6 +1,8 @@
 package com.kirby.lookthis.main.security;
 
 import com.google.gson.Gson;
+import com.kirby.lookthis.main.entity.RefreshToken;
+import com.kirby.lookthis.main.repository.RefreshTokenRepository;
 import com.kirby.lookthis.main.uil.JwtUtil;
 import com.kirby.lookthis.user.entity.LoginHistory;
 import com.kirby.lookthis.user.entity.User;
@@ -28,6 +30,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     private final UserRepository userRepository;
     private final LoginHistoryRepository loginHistoryRepository;
     private final JwtUtil jwtUtil;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -36,11 +39,20 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         String id = user.getUserId();
         String name = user.getName();
 
+        /*Access 토큰 생성*/
         Map<String, Object> jwtInfo = new HashMap<>();
         jwtInfo.put("userId", id);
         jwtInfo.put("name", name);
         String jwt = jwtUtil.generateToken(jwtInfo, id);
         String url = makeRedirectUrl(request.getHeader("Referer"), jwt);
+
+        /*refresh 토큰 저장*/
+        String refreshJwt = jwtUtil.generateRefreshToken(jwtInfo, id);
+        RefreshToken refreshToken = RefreshToken.builder()
+                .refreshToken(refreshJwt)
+                .user_id(id)
+                .build();
+        refreshTokenRepository.save(refreshToken);
 
         LoginHistory loginHistory = LoginHistory
                 .builder()
@@ -48,7 +60,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
                 .status("Login")
                 .platform("lookthis")
                 .user_id(id)
-                .service("http://lookthis.co.kr")
+                .service("https://lookthis.co.kr")
                 .build();
         loginHistoryRepository.save(loginHistory);
 
