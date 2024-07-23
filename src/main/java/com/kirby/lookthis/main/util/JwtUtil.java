@@ -1,4 +1,4 @@
-package com.kirby.lookthis.main.uil;
+package com.kirby.lookthis.main.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,7 +21,7 @@ public class JwtUtil implements Serializable {
     private String secret;
     @Value("${jwt.response.header}")
     private String jwtHeader;
-    private long accessTokenValidTime = Duration.ofSeconds(60).toMillis(); // 만료시간 30분
+    private long accessTokenValidTime = Duration.ofMinutes(60).toMillis(); // 만료시간 30분
     private long refreshTokenValidTime = Duration.ofDays(14).toMillis(); // 만료시간 2주
 
     //retrieve username from jwt token

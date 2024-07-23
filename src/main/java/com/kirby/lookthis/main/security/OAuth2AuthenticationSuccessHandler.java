@@ -1,8 +1,8 @@
 package com.kirby.lookthis.main.security;
-
-import com.kirby.lookthis.main.entity.RefreshToken;
-import com.kirby.lookthis.main.repository.RefreshTokenRepository;
-import com.kirby.lookthis.main.uil.JwtUtil;
+/*
+import com.kirby.lookthis.main.entity.RefreshToken;*//*
+import com.kirby.lookthis.main.repository.RefreshTokenRepository;*/
+import com.kirby.lookthis.main.util.JwtUtil;
 import com.kirby.lookthis.user.entity.LoginHistory;
 import com.kirby.lookthis.user.repository.LoginHistoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,8 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    private final LoginHistoryRepository loginHistoryRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final LoginHistoryRepository loginHistoryRepository;/*
+    private final RefreshTokenRepository refreshTokenRepository;*/
     private final JwtUtil jwtUtil;
 
     @Override
@@ -42,12 +42,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String url = request.getRequestURI();
 
         /*refresh 토큰 저장*/
-        String refreshJwt = jwtUtil.generateRefreshToken(jwtInfo, id);
+        /*String refreshJwt = jwtUtil.generateRefreshToken(jwtInfo, id);
         RefreshToken refreshToken = RefreshToken.builder()
                 .refreshToken(refreshJwt)
                 .user_id(id)
                 .build();
-        refreshTokenRepository.save(refreshToken);
+        refreshTokenRepository.save(refreshToken);*/
 
         if(url.charAt(url.length() - 1) == '2'){
             LoginHistory loginHistory = LoginHistory
@@ -56,7 +56,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                     .status("Login")
                     .platform("Naver")
                     .user_id(id)
-                    .service("https://lookthis-front-client.vercel.app")
+                    .service("http://localhost:3000")
                     .build();
             loginHistoryRepository.save(loginHistory);
             url = makeRedirectUrl2(jwt);
@@ -81,7 +81,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("https://lookthis-front-client.vercel.app/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 

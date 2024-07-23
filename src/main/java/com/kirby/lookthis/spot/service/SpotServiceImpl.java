@@ -46,7 +46,7 @@ public class SpotServiceImpl implements SpotService{
 
     @Override
     public List<FlyerDto> getFlyerHistoryList(SpotDto spotDto) {
-        return flyerRepository.findFlyerHistoryBySpots( spotDto.getUserId());
+        return flyerRepository.findFlyerHistoryBySpots(spotDto.getUserId());
     }
 
     @Override

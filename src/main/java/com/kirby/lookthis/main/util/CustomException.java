@@ -1,4 +1,4 @@
-package com.kirby.lookthis.main.uil;
+package com.kirby.lookthis.main.util;
 
 public class CustomException extends Exception {
 

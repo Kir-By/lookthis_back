@@ -2,15 +2,12 @@ package com.kirby.lookthis.main.contoller;
 
 import com.kirby.lookthis.main.entity.SystemError;
 import com.kirby.lookthis.main.service.SystemErrorService;
-import com.kirby.lookthis.main.uil.CustomException;
+import com.kirby.lookthis.main.util.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;

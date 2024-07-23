@@ -1,4 +1,4 @@
-package com.kirby.lookthis.main.uil;
+package com.kirby.lookthis.main.util;
 
 import java.io.IOException;
 import java.io.Serializable;
