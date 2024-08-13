@@ -1,10 +1,11 @@
 package com.kirby.lookthis.store.entity;
 
-import com.sun.istack.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,7 +33,17 @@ public class Flyer {
 
     private LocalDateTime endValidDate;
 
+    @Comment("0: 인코딩 전, 1: 인코딩 완료")
     private Integer status;
+
+    @Comment("이미지 확장자")
+    private String type;
+
+    @Comment("임시 위치")
+    private String tempPath;
+
+    @Comment("에러 메시지")
+    private String error_message;
 
     @PrePersist
     public void createDate() {

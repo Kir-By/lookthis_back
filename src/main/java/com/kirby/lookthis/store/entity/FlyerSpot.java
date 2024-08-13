@@ -1,10 +1,10 @@
 package com.kirby.lookthis.store.entity;
 
 import com.kirby.lookthis.spot.entity.Spot;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
 
 @Entity
 @Builder

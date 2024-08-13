@@ -1,12 +1,12 @@
 package com.kirby.lookthis.store.entity;
 
 import com.kirby.lookthis.user.entity.User;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

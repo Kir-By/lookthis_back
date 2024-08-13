@@ -1,9 +1,9 @@
 package com.kirby.lookthis.main.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @DynamicUpdate

@@ -5,6 +5,8 @@ import com.kirby.lookthis.main.repository.RefreshTokenRepository;*/
 import com.kirby.lookthis.main.util.JwtUtil;
 import com.kirby.lookthis.user.entity.LoginHistory;
 import com.kirby.lookthis.user.repository.LoginHistoryRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -12,8 +14,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +56,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                     .status("Login")
                     .platform("Naver")
                     .user_id(id)
-                    .service("http://localhost:3000")
+                    .service("https://lookthis.co.kr")
                     .build();
             loginHistoryRepository.save(loginHistory);
             url = makeRedirectUrl2(jwt);
@@ -81,7 +81,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/"+token)
+        return UriComponentsBuilder.fromUriString("https://lookthis.co.kr/oauth2/redirect/"+token)
                 .build().toUriString();
     }
 

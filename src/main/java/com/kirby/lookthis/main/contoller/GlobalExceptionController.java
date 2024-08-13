@@ -3,11 +3,10 @@ package com.kirby.lookthis.main.contoller;
 import com.kirby.lookthis.main.entity.SystemError;
 import com.kirby.lookthis.main.service.SystemErrorService;
 import com.kirby.lookthis.main.util.CustomException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;

@@ -5,12 +5,12 @@ import com.kirby.lookthis.spot.dto.SpotDto;
 import com.kirby.lookthis.spot.entity.Spot;
 import com.kirby.lookthis.spot.repository.SpotRepository;
 import com.kirby.lookthis.store.repository.FlyerSpotRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @SpringBootTest

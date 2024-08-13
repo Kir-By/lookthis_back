@@ -1,9 +1,9 @@
 package com.kirby.lookthis.main.contoller;
 
-import com.google.common.net.HttpHeaders;
 import lombok.extern.log4j.Log4j2;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
