@@ -70,7 +70,7 @@ public class FlyerController {
         return flyerId;
     }
 
-    @PostMapping(value = "flyer/spot", produces = "application/json")
+    @PutMapping(value = "flyer/spot", produces = "application/json")
     public void insertFlyerSpot(@RequestBody FlyerSpotDto flyerSpotDto) {
         storeService.insertFlyerSpot(flyerSpotDto);
     }
